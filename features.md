@@ -2,14 +2,20 @@
 
 ## Features
 
-- As a person that takes pictures, I want to be able to see my images so that I can enjoy looking at them.
-  - Backend will create a route to see a user's pictures. Frontend will create a user page with tiled pictures.
-- As a person that likes looking at pictures, I want to be able to like other images so that people know I like them.
-  - Backend will associate a counter with a picture. Frontend will create a like button for counter that users can click and will change color to indicate a like.
-- As a person who has opinions on pictures, I want to be able to comment on other images so that I can share those opinions.
-  - Backend will grab comments from page and store them, and then add to the html on page. Front end will create a comment space under pictures in feed. When a user posts a comment, it will appear under picture with user's name.
-- As a person with friends, I want to be able to follow other people's photo feeds so that I can enjoy their pictures too.
-  - Backend will have to associate users with friends and then pass those friends photos into a feed. Frontend will display photos on the webpage. The user will be able to scroll down to see photos and associated comments/likes.
+- As a person that takes pictures, I want to be able to post and see my images so that I can enjoy looking at them.
+  -Expected code time: 2 day
+
+- As a photo enthusiast, I want to be able to like other images so that people know I appreciate their photography.
+  -Expected code time: 1/2 day
+
+- As an opinionated person, I want to be able to comment on images so that I can share those opinions.
+  -Expected code time: 1/2 day
+
+- As a social creature, I want to be able to follow other people's photo feeds so that I can enjoy their pictures too.
+  -Expected code time: 1 day
+
+- As a person with security concerns, I want to be able to log in, logout and sign up as a user to ensure my pictures are my own.
+  -Expected code time: 1 day
 
 ### Stretch goals:
 
