@@ -3,7 +3,7 @@
 ## Features
 
 - As a person that takes pictures, I want to be able to post and see my images so that I can enjoy looking at them.
-  -Expected code time: 2 day
+  -Expected code time: 1 day
 
 - As a photo enthusiast, I want to be able to like other images so that people know I appreciate their photography.
   -Expected code time: 1/2 day
@@ -15,7 +15,7 @@
   -Expected code time: 1 day
 
 - As a person with security concerns, I want to be able to log in, logout and sign up as a user to ensure my pictures are my own.
-  -Expected code time: 1 day
+  -Expected code time: 2 day
 
 ### Stretch goals:
 
