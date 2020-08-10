@@ -5,10 +5,32 @@ const { User } = db;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secret, expiresIn } = require("../../config").jwtConfig;
-const { routeHandler } = require("../utils");
+const { routeHandler, handleValidationErrors } = require("../utils");
 const { getUserToken } = require("../utils/auth");
+const { check, validationResult } = require("express-validator");
+
+const validateUserName = [check("userName").exists()];
+
+const validateAuthFields = [
+  check("userName").exists().isLength({ min: 5, max: 70 }),
+  check("email", "Email field must be a valid email").exists(),
+  check("email").isEmail(),
+  check("password").exists(),
+  check("password", "Password must be 6 or more characters").isLength({
+    min: 5,
+    max: 70,
+  }),
+  check("password2", "Confirm password field")
+    .exists()
+    .isLength({ min: 5, max: 70 })
+    .custom((value, { req }) => value === req.body.password),
+];
+
 router.post(
   "/token",
+  validateAuthFields,
+  validateUserName,
+  handleValidationErrors,
   routeHandler(async (req, res, next) => {
     const { userName, password } = req.body;
     const user = await User.findOne({
@@ -29,6 +51,9 @@ router.post(
 );
 router.post(
   "/",
+  validateAuthFields,
+  validateUserName,
+  handleValidationErrors,
   routeHandler(async (req, res, next) => {
     const { userName, password, email } = req.body;
     const user = await User.create({

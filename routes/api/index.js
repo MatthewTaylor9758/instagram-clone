@@ -22,5 +22,8 @@ router.use((err, req, res, next) => {
     stack: isProduction ? null : err.stack,
   });
 });
+router.use("*", (req, res) => {
+  res.status(404).json({ message: "route does not exist" });
+});
 
 module.exports = router;

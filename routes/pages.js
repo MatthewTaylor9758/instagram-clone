@@ -6,4 +6,8 @@ router.get("/login", (req, res, next) => {
 router.get("/signup", (req, res, next) => {
   res.render("signup");
 });
+
+router.get((req, res) => {
+  res.render("error-page");
+});
 module.exports = router;
