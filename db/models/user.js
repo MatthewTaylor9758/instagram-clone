@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const bcrypt = require("bcryptjs");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -7,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    validatePassword(password) {
+      return bcrypt.compareSync(password, this.password.toString());
+    }
     static associate(models) {
       User.hasMany(models.Relationship, {
         foreignKey: "userId",
@@ -25,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
+      // Add in some validations? Need to add checks at every point?
       userName: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,

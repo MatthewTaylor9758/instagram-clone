@@ -1,0 +1,20 @@
+extends layout.pug
+include includes/auth-input.pug
+
+append head
+  script(src='public/js/signup.js' type="module" defer)
+
+block content
+  form#signup-form
+    img#insta-logo-fill-in-later
+    h1 Sign up for Instagram
+    ul#errors-container
+    +authInput('Email', "email")
+      input(type='text' name='email' required)
+    +authInput('UserName', "userName")
+      input(type='text' name='userName' required)
+    +authInput('Password', "password" )
+      input(type='password' name='password' required)
+    +authInput('Confirm Password', "password2")
+      input(type='password2' name='password2' reuired)
+    button(type="submit") Sign up

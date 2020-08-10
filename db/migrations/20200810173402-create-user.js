@@ -17,10 +17,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
         unique: true,
+        validate: {
+          isEmail: true,
+        },
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING, // change to STRING.BINARY and hashedPassword?
       },
       isPrivate: {
         type: Sequelize.BOOLEAN,
