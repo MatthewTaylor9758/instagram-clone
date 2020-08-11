@@ -1,33 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db/models");
-const { routeHandler } = require("./utils");
+const db = require("../../db/models");
+const { routeHandler } = require("../utils");
 const { User, Relationship, Comment, Like, Picture, Status } = db;
-const { getUserToken, requireAuth } = require("./utils/auth");
-// const pics = require('../public/images');
-
-router.get("/login", (req, res, next) => {
-  res.render("login");
-});
-router.get("/signup", (req, res, next) => {
-  res.render("signup");
-});
-
-router.get(
-  "/:id(\\d+)",
+router.post(
+  "/",
   routeHandler(async (req, res, next) => {
-    const id = parseInt(req.params.id, 10);
-    const user = await User.findOne({
-      where: {
-        id,
-      },
+    console.log("body req", req.body);
+    const { content, pictureId } = req.body;
+    const userId = await parseInt(req.cookies.user);
+    const comment = await Comment.create({
+      content,
+      userId,
+      pictureId,
     });
-    const pictures = await Picture.findAll({
-      where: {
-        userId: user.id,
-      },
-    });
-    res.render("user-page.pug", { user, pictures });
+    res.redirect("/");
   })
 );
 router.get(
@@ -76,8 +63,4 @@ router.get(
     });
   })
 );
-router.get((req, res) => {
-  res.render("error-page");
-});
-
 module.exports = router;

@@ -9,5 +9,25 @@ html(lang='en')
       a(href=`/${user.id}`) #{user.userName}
     each picture in pictures
       img(src=picture.fileLocation)
+      a liked by #{totalLikes}
+        each like in likes
+          a #{like.User.id},
+      if (!userLike)
+        img#like-button(src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1024px-Heart_coraz%C3%B3n.svg.png')
+        form(method="post" action="/api/likes")
+          input(type="hidden" name="pictureId" value=`${picture.id}`)
+          input(type="hidden" name="userId" value=`${user.id}`)
+          button(type="submit") Like!
+      else
+        img(src='https://www.clker.com/cliparts/K/s/1/Z/m/p/grey-heart-hi.png')
+      div
+        each comment in comments
+          p #{comment.User.userName} #{comment.content}
+      div
+        form#comment-form(method="post" action="/api/comments")
+          input#comment-space(type='text' name='content' placeholder="comment")
+          input(type="hidden" name="pictureId" value=`${picture.id}`)
+          button(type="submit") Submit Comment
+
     div
       a(href='/login') Log Out
