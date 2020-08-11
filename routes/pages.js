@@ -45,13 +45,33 @@ router.get(
       where: {
         pictureId: picIds,
       },
+      include: {
+        model: User,
+      },
     });
     const likes = await Like.findAll({
       where: {
         pictureId: picIds,
       },
+      include: {
+        model: User,
+      },
     });
-    res.render("friend-feed.pug", { pictures, user, comments, likes });
+    const userLike = await Like.findOne({
+      where: {
+        userId: user.id,
+      },
+    });
+    let totalLikes = 0;
+    totalLikes = parseInt(likes.forEach((like) => totalLikes++));
+    res.render("friend-feed.pug", {
+      pictures,
+      user,
+      comments,
+      likes,
+      userLike,
+      totalLikes,
+    });
   })
 );
 router.post(
@@ -64,6 +84,18 @@ router.post(
       content,
       userId,
       pictureId,
+    });
+    res.redirect("/");
+  })
+);
+router.post(
+  "/like",
+  routeHandler(async (req, res, next) => {
+    let { pictureId } = req.body;
+    const userId = await parseInt(req.cookies.user);
+    const like = await Like.create({
+      pictureId,
+      userId,
     });
     res.redirect("/");
   })
