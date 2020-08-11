@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const usersRouter = require("./users");
+const likesRouter = require("./likes");
+const commentsRouter = require("./comments");
 const { environment } = require("../../config");
 const { ValidationError } = require("sequelize");
 router.use("/users", usersRouter);
+router.use("/likes", likesRouter);
+router.use("/comments", commentsRouter);
 router.use((err, req, res, next) => {
   if (err instanceof ValidationError) {
     err.errors = err.errors.map((e) => e.message);
