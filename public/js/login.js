@@ -5,7 +5,7 @@ form.addEventListener("submit", async (e) => {
   const userName = formData.get("userName");
   const password = formData.get("password");
   const body = { userName, password };
-  const res = await fetch("/routes/api/users/token", {
+  const res = await fetch("/api/users/token", {
     method: "POST",
     body: JSON.stringify(body),
     headers: {
