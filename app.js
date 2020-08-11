@@ -5,8 +5,8 @@ const morgan = require("morgan");
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// const cookieParser = require("cookie-parser");
-// app.use(cookieParser());
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 // const csrfProtection = require("csurf")({ cookie: true });
 // app.use(csrfProtection);
 app.use((req, res, next) => {
