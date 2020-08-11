@@ -1,0 +1,70 @@
+html {
+    /* background-image: url(https://static.businessinsider.com/image/52fc0e91ecad04d917905b69-/image.jpg); */
+    background: linear-gradient(35deg, yellow, orange, orangered, purple,purple,purple, purple);
+}
+
+#outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* box-sizing: border-box; */
+}
+
+#login-form {
+    display: flex;
+    border: 1px solid rgba(219,219,219,1);
+    flex-direction: column;
+    color: rgba(38,38,38,1);
+    flex-grow:1;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#new-user {
+    display: flex;
+    border: 1px solid rgba(219,219,219,1);
+    flex-direction: column;
+    color: rgba(38,38,38,1);
+    flex-grow:1;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input:focus {
+    background-color: cadetblue;
+    border: 2px solid green;
+  }
+
+button {
+    padding: 5px 0;
+    border: 0;
+    border-radius: 5px;
+    background-color: cadetblue;
+    color: white;
+    width: 80%;
+}
+
+button:active {
+    border: 0;
+    border-radius: 5px;
+    background-color: cadetblue;
+    color: white;
+}
+
+button:hover {
+    background-color: blue;
+}
+
+.auth-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

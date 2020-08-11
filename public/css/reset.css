@@ -1,0 +1,32 @@
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, span, a {
+  color:white;
+  font-size: 14px;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  padding: 10px;
+}
+
+input {
+  color: black;
+  font-size: 14px;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+a:hover {
+  font-size: 1.03rem;
+}
+
+/* input:focus {
+  background-color: cadetblue;
+  border: 1px solid green;
+} */

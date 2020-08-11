@@ -4,16 +4,20 @@ include includes/auth-input.pug
 
 append head
   script(src='/public/js/login.js' type="module" defer)
+  link(rel="stylesheet" href="/public/css/login.css")
 
 block content
+  div#outer
+    //- img(src='https://static.businessinsider.com/image/52fc0e91ecad04d917905b69-/image.jpg')
     form#login-form
       img#insta-logo-fill-in-later
       h1 Log in to Instagram
       #errors-container
-      +authInput('UserName', "userName")
-        input(type='text' name='userName' required)
-      +authInput('Password', "password")
-        input(type='password' name='password' required)
+      +authInput('', "userName")
+        input(type='text' name='userName' placeholder='Username' required)
+      +authInput('', "password")
+        input(type='password' name='password' placeholder='Password' required)
       button(type="submit") Log in
 
-    a(href="/signup") Not a user? Sign up!
+    div#new-user
+      a(href="/signup") Not a user? Sign up!
