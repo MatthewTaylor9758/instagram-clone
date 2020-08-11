@@ -7,6 +7,6 @@ exports.getUserToken = async (user) => {
       username: user.userName,
     },
     secret,
-    { expiresIn }
+    { expiresIn: parseInt(expiresIn) }
   );
 };
