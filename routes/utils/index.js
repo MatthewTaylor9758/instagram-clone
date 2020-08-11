@@ -16,7 +16,6 @@ exports.handleValidationErrors = (req, res, next) => {
     err.errors = errors;
     err.status = 400;
     err.title = "bad request";
-    next(err);
   }
   next();
 };

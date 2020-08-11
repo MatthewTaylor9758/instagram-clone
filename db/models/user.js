@@ -17,13 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: "relatedUserId",
       });
       User.hasMany(models.Picture, {
-        foreignKey: "userID",
+        foreignKey: "userId",
       });
       User.hasMany(models.Comment, {
-        foreignKey: "userID",
+        foreignKey: "userId",
       });
       User.hasMany(models.Like, {
-        foreignKey: "userID",
+        foreignKey: "userId",
       });
     }
   }
