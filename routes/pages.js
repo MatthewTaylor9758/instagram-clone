@@ -34,7 +34,13 @@ router.get(
     const pictures = await Picture.findAll({
       include: { model: User },
     });
-    res.render("friend-feed.pug", { pictures });
+    console.log(req.cookies, "cookies");
+    const user = await User.findOne({
+      where: {
+        id: await parseInt(req.cookies.user),
+      },
+    });
+    res.render("friend-feed.pug", { pictures, user });
   })
 );
 router.get((req, res) => {
