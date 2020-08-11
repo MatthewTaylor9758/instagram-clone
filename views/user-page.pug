@@ -1,0 +1,12 @@
+doctype
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title
+  body
+    h1 Instagram
+    a(href='/') Friend Feed
+    each picture in pictures
+      img(src=picture.fileLocation)
+    div
+      a(href='/login') Log Out
