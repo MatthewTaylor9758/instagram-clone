@@ -9,5 +9,15 @@ html(lang='en')
       a(href=`/${user.id}`) #{user.userName}
     each picture in pictures
       img(src=picture.fileLocation)
+      img#like-button(src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1024px-Heart_coraz%C3%B3n.svg.png')
+      div
+        each comment in comments
+          h2 #{comment.content}
+      div
+        form#comment-form(method="post")
+          input#comment-space(type='text' name='content' placeholder="comment")
+          input(type="hidden" name="pictureId" value=`${picture.id}`)
+          button(type="submit") Submit Comment
+
     div
       a(href='/login') Log Out

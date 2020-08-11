@@ -32,15 +32,40 @@ router.get(
   "/",
   routeHandler(async (req, res, next) => {
     const pictures = await Picture.findAll({
-      include: { model: User },
+      include: { model: User, model: Comment },
     });
-    console.log(req.cookies, "cookies");
     const user = await User.findOne({
       where: {
         id: await parseInt(req.cookies.user),
       },
     });
-    res.render("friend-feed.pug", { pictures, user });
+    const picIds = [];
+    pictures.forEach((picture) => picIds.push(picture.id));
+    const comments = await Comment.findAll({
+      where: {
+        pictureId: picIds,
+      },
+    });
+    const likes = await Like.findAll({
+      where: {
+        pictureId: picIds,
+      },
+    });
+    res.render("friend-feed.pug", { pictures, user, comments, likes });
+  })
+);
+router.post(
+  "/",
+  routeHandler(async (req, res, next) => {
+    console.log("body req", req.body);
+    const { content, pictureId } = req.body;
+    const userId = await parseInt(req.cookies.user);
+    const comment = await Comment.create({
+      content,
+      userId,
+      pictureId,
+    });
+    res.redirect("/");
   })
 );
 router.get((req, res) => {
