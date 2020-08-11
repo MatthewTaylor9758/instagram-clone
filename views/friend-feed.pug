@@ -4,5 +4,10 @@ html(lang='en')
     meta(charset='utf-8')
     title
   body
+    h1 Instagram
+    div
+      a(href=`/${user.id}`) #{user.userName}
     each picture in pictures
       img(src=picture.fileLocation)
+    div
+      a(href='/login') Log Out

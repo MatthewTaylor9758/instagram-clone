@@ -4,5 +4,9 @@ html(lang='en')
     meta(charset='utf-8')
     title
   body
+    h1 Instagram
+    a(href='/') Friend Feed
     each picture in pictures
-      a(href=picture.fileLocation)
+      img(src=picture.fileLocation)
+    div
+      a(href='/login') Log Out
