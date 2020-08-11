@@ -13,7 +13,7 @@ module.exports = {
      */
     await queryInterface.bulkInsert("Pictures", [
       {
-        userId: 3,
+        userId: 1,
         fileLocation: "public/images/DSC_0008.jpg",
         createdAt: new Date(),
         updatedAt: new Date(),

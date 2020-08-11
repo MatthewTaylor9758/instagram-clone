@@ -1,0 +1,26 @@
+#header {
+    display: flex;
+    width: 100%;
+    height: 54px;
+    border: 1px solid rgba(219,219,219,1);
+}
+#font {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100px;
+    overflow: visible;
+}
+#font, #images, #logout {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 222px;
+}
+
+#image {
+    width: 50%
+}
+
+.instafont {
+    overflow: visible;
+}

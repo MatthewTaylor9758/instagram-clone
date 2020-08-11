@@ -6,9 +6,10 @@ const { ValidationError } = require("sequelize");
 router.use("/users", usersRouter);
 router.use((err, req, res, next) => {
   if (err instanceof ValidationError) {
-    err.errors = err.errors.map((e) => e.message);
+    let error = err.errors.map((e) => e.message);
+    next(error);
   }
-  next(err);
+  next()
 });
 
 router.use((err, req, res, next) => {

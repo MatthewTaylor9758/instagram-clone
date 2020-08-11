@@ -11,7 +11,7 @@ html {
     /* box-sizing: border-box; */
 }
 
-#login-form {
+#signup-form {
     display: flex;
     border: 1px solid rgba(219,219,219,1);
     flex-direction: column;
@@ -37,24 +37,16 @@ html {
     height: 100px;
     overflow: visible;
 }
-
 .instafont {
     overflow: visible;
 }
 
-#new-user {
+path {
     display: flex;
-    border: 1px solid rgba(219,219,219,1);
-    flex-direction: column;
-    color: rgba(38,38,38,1);
-    flex-grow:1;
+    margin: auto;
     justify-content: center;
-    margin-top: 12px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    width: 100%;
+    align-items: center;
 }
-
 input:focus {
     background-color: cadetblue;
     border: 2px solid green;
@@ -68,13 +60,13 @@ button {
     color: white;
     width: 80%;
 }
-
+/* 
 button:active {
     border: 0;
     border-radius: 5px;
     background-color: cadetblue;
     color: white;
-}
+} */
 
 button:hover {
     background-color: blue;
