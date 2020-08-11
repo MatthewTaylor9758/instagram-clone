@@ -4,6 +4,7 @@ const db = require("../db/models");
 const { routeHandler } = require("./utils");
 const { User, Relationship, Comment, Like, Picture, Status } = db;
 const { getUserToken, requireAuth } = require("./utils/auth");
+// const pics = require('../public/images');
 
 router.get("/login", (req, res, next) => {
   res.render("login");
@@ -11,6 +12,7 @@ router.get("/login", (req, res, next) => {
 router.get("/signup", (req, res, next) => {
   res.render("signup");
 });
+
 router.get(
   "/:id(\\d+)",
   routeHandler(async (req, res, next) => {

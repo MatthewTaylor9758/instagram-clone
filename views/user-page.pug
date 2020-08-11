@@ -5,8 +5,17 @@ html(lang='en')
     title
   body
     h1 Instagram
-    a(href='/') Friend Feed
-    each picture in pictures
-      img(src=picture.fileLocation)
+    div
+      a(href='/') Friend Feed
+    div
+      form(action=`/${user.id}` method='post')
+        input(type='text' name='new-picture')
+        button(type='submit') Add Image
+    div
+      each picture in pictures
+        img(src=picture.fileLocation)
+        form(action=`/${user.id}` method='delete')
+          input(type='hidden')
+          button(type='delete') Delete
     div
       a(href='/login') Log Out

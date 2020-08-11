@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../db/models");
-const { User } = db;
+const { User, Picture } = db;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secret, expiresIn } = require("../../config").jwtConfig;
@@ -25,6 +25,31 @@ const validateAuthFields = [
     .isLength({ min: 5, max: 70 })
     .custom((value, { req }) => value === req.body.password),
 ];
+router.get(
+  '/',
+  async(req, res, next) => {
+    const users = await User.findAll();
+    res.json({ users });
+  }
+)
+router.get(
+  "/:id(\\d+)",
+  routeHandler(async (req, res, next) => {
+    const id = parseInt(req.params.id, 10);
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+    });
+    console.log('user', user);
+    const pictures = await Picture.findAll({
+      where: {
+        userId: user.id,
+      },
+    });
+    res.render("user-page.pug", { user, pictures });
+  })
+);
 
 router.post(
   "/token",
