@@ -14,7 +14,7 @@ router.post(
       userId,
       pictureId,
     });
-    res.redirect("/");
+    res.json({ comment });
   })
 );
 router.get(
@@ -38,28 +38,34 @@ router.get(
         model: User,
       },
     });
-    const likes = await Like.findAll({
-      where: {
-        pictureId: picIds,
-      },
-      include: {
-        model: User,
-      },
-    });
-    const userLike = await Like.findOne({
-      where: {
-        userId: user.id,
-      },
-    });
-    let totalLikes = 0;
-    totalLikes = parseInt(likes.forEach((like) => totalLikes++));
-    res.render("friend-feed.pug", {
+    res.json({
       pictures,
       user,
       comments,
-      likes,
-      userLike,
-      totalLikes,
+    });
+  })
+);
+router.get(
+  "/:id(\\d+)",
+  routeHandler(async (req, res, next) => {
+    const pictureId = parseInt(req.params.id, 10);
+    const picture = await Picture.findByPk(pictureId, {
+      include: { model: User, model: Comment },
+    });
+    const comments = await Comment.findAll({
+      where: {
+        pictureId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["userName"],
+        },
+      ],
+    });
+    res.json({
+      picture,
+      comments,
     });
   })
 );

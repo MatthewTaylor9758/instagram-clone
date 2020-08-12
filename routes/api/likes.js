@@ -13,7 +13,7 @@ router.post(
       pictureId,
       userId,
     });
-    res.redirect("/");
+    res.json({ like });
   })
 );
 router.get(
@@ -29,21 +29,16 @@ router.get(
     });
     const picIds = [];
     pictures.forEach((picture) => picIds.push(picture.id));
-    const comments = await Comment.findAll({
-      where: {
-        pictureId: picIds,
-      },
-      include: {
-        model: User,
-      },
-    });
     const likes = await Like.findAll({
       where: {
         pictureId: picIds,
       },
-      include: {
-        model: User,
-      },
+      include: [
+        {
+          model: User,
+          attributes: ["userName"],
+        },
+      ],
     });
     const userLike = await Like.findOne({
       where: {
@@ -52,10 +47,47 @@ router.get(
     });
     let totalLikes = 0;
     totalLikes = parseInt(likes.forEach((like) => totalLikes++));
-    res.render("friend-feed.pug", {
+    res.json({
       pictures,
       user,
-      comments,
+      likes,
+      userLike,
+      totalLikes,
+    });
+  })
+);
+router.get(
+  "/:id(\\d+)",
+  routeHandler(async (req, res, next) => {
+    const pictureId = parseInt(req.params.id, 10);
+    const picture = await Picture.findByPk(pictureId, {
+      include: { model: User, model: Comment },
+    });
+    const user = await User.findOne({
+      where: {
+        id: await parseInt(req.cookies.user),
+      },
+    });
+    const likes = await Like.findAll({
+      where: {
+        pictureId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["userName"],
+        },
+      ],
+    });
+    const userLike = await Like.findOne({
+      where: {
+        userId: user.id,
+      },
+    });
+    let totalLikes = 0;
+    totalLikes = parseInt(likes.forEach((like) => totalLikes++));
+    res.json({
+      user,
       likes,
       userLike,
       totalLikes,

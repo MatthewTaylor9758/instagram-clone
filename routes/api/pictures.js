@@ -5,31 +5,41 @@ const { routeHandler } = require("../utils");
 const { User, Relationship, Comment, Like, Picture, Status } = db;
 const { getUserToken, requireAuth } = require("../utils/auth");
 
-router.get('/',
-  routeHandler( async (req, res, next) => {
-    const pictures = await Picture.findAll();
+router.get(
+  "/",
+  routeHandler(async (req, res, next) => {
+    const pictures = await Picture.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["userName"],
+        },
+      ],
+    });
     res.json({ pictures });
   })
-)
+);
 
 router.get(
-  '/:id(\\d+)',
+  "/:id(\\d+)",
   routeHandler(async (req, res, next) => {
     const pictureId = parseInt(req.params.id, 10);
-    const picture = await Picture.findByPk(pictureId);
+    const picture = await Picture.findByPk(pictureId, {
+      include: { model: User, attributes: "userName" },
+    });
     res.json({ picture });
   })
-)
+);
 
 router.delete(
-  '/:id(\\d+)',
+  "/:id(\\d+)",
   routeHandler(async (req, res, next) => {
     const pictureId = parseInt(req.params.id, 10);
     const picture = await Picture.findByPk(pictureId);
-    console.log('picture', picture);
+    console.log("picture", picture);
     await picture.destroy();
-    res.status(204).end()
+    res.status(204).end();
   })
-)
+);
 
 module.exports = router;
