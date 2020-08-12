@@ -18,6 +18,12 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        userId: 2,
+        fileLocation: "public/images/balloons.jpg",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 

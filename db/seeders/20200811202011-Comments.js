@@ -13,8 +13,8 @@ module.exports = {
      */
     await queryInterface.bulkInsert("Comments", [
       {
-        pictureId: 4,
-        userId: 3,
+        pictureId: 1,
+        userId: 1,
         content: "I love this pic!",
         createdAt: new Date(),
         updatedAt: new Date(),
