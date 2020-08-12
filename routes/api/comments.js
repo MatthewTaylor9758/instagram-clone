@@ -49,9 +49,6 @@ router.get(
   "/:id(\\d+)",
   routeHandler(async (req, res, next) => {
     const pictureId = parseInt(req.params.id, 10);
-    const picture = await Picture.findByPk(pictureId, {
-      include: { model: User, model: Comment },
-    });
     const comments = await Comment.findAll({
       where: {
         pictureId,
@@ -64,7 +61,6 @@ router.get(
       ],
     });
     res.json({
-      picture,
       comments,
     });
   })
