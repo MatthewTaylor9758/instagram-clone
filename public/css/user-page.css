@@ -3,6 +3,8 @@
     width: 100%;
     height: 54px;
     border: 1px solid rgba(219,219,219,1);
+    margin-left: -10;
+    margin-right: -10;
 }
 #font {
     display: flex;
@@ -11,7 +13,7 @@
     height: 100px;
     overflow: visible;
 }
-#font, #images, #logout {
+#font, #images, #logout, #delete, #friends {
     display: flex;
     flex-direction: column;
     margin: 0px 222px;

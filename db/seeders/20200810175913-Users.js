@@ -24,6 +24,14 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          userName: "TestUser",
+          email: "test@user.io",
+          isPrivate: false,
+          password: await bcrypt.hash("password", 10),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       { fields: ["userName", "email", "password"] }
     );
