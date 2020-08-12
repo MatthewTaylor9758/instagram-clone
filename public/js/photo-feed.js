@@ -23,16 +23,18 @@ const getCommentsForPic = async (photoId) => {
   const data = await res.json();
   return data;
 };
+
 const populateCommentList = async (photoId) => {
   const { comments } = await getCommentsForPic(photoId);
-
   let commentList = document.querySelector(".comment-list");
+  console.log(commentList);
   for (let i = 0; i < comments.length; ++i) {
     let comment = comments[i];
     let commentLi = document.createElement("li");
     commentLi.innerHTML = `${comment.User.userName} ${comment.content}`;
     commentList.appendChild(commentLi);
   }
+  console.log(commentList);
   return commentList;
 };
 
@@ -62,15 +64,17 @@ const populatePhotoFeed = async () => {
               <input type="hidden" name="userId" value=${photo.User.id}>
               <button #like-button type="submit"> Like!
               </form>
-             <i class="totalLikes"></i>
-              ${totalLikes} likes
+             <div class="totalLikes">
+                ${totalLikes} likes
+              </div>
             </div>
           <ul class="comment-list">
           </ul>
           <div class="add-comment">
-          <form #comment-form method="post" action="/api/comments")>
+          <form class="comment-form" method="post" action="/api/comments")>
           <input #comment-space type='text' name='content' placeholder="comment">
           <input type="hidden" name="pictureId" value=${photo.id}>
+          <input type="hidden" name="userId" value=${photo.User.id}>
           <button #comment-button type="submit" > Submit Comment
           </form>
           </div>
@@ -81,6 +85,7 @@ const populatePhotoFeed = async () => {
     photoFeed.innerHTML += photoLi;
     await populateCommentList(photo.id);
     await likeButton(totalLikes);
+    await commentButton();
   }
 };
 
@@ -88,11 +93,12 @@ populatePhotoFeed();
 
 let likeButton = (totalLikes) => {
   let likeForm = document.querySelector("#like-form");
+  let pictureId;
   likeForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(likeForm);
     const userId = formData.get("userId");
-    const pictureId = formData.get("pictureId");
+    pictureId = formData.get("pictureId");
     const body = { userId, pictureId };
     const res = await fetch("/api/likes", {
       method: "POST",
@@ -108,7 +114,40 @@ let likeButton = (totalLikes) => {
       errorsContainer.innerHTML = message;
       return;
     }
-    // likes = document.getElementById("total-likes");
-    window.location.href = "/";
+    let likeEle = document.querySelector(".totalLikes");
+    let likes = await getLikesForPic(pictureId);
+    let totalLikes = 0;
+    for (let i = 0; i < likes.likes.length; ++i) {
+      totalLikes++;
+    }
+    likeEle.innerHTML = `${totalLikes} likes`;
+  });
+};
+
+let commentButton = () => {
+  let commentForm = document.querySelector(".comment-form");
+  let pictureId;
+  commentForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(commentForm);
+    const userId = formData.get("userId");
+    pictureId = formData.get("pictureId");
+    const content = formData.get("content");
+    const body = { userId, pictureId, content };
+    const res = await fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      const { message } = data;
+      const errorsContainer = document.querySelector("#errors-container");
+      errorsContainer.innerHTML = message;
+      return;
+    }
+    await populateCommentList(pictureId);
   });
 };
