@@ -89,6 +89,7 @@ router.post(
       isPrivate: false,
     });
     const token = await getUserToken(user);
+    console.log(user)
     res.cookie("token", token, { maxAge: expiresIn * 1000 });
     res.json({ id: user.id, token });
   })
