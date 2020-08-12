@@ -5,21 +5,20 @@ const likesRouter = require("./likes");
 const commentsRouter = require("./comments");
 const { environment } = require("../../config");
 const { ValidationError } = require("sequelize");
-const picturesRouter = require('./pictures');
+const picturesRouter = require("./pictures");
 router.use("/users", usersRouter);
 
-router.use('/pictures', picturesRouter);
-
+router.use("/pictures", picturesRouter);
 
 router.use("/likes", likesRouter);
 router.use("/comments", commentsRouter);
 
 router.use((err, req, res, next) => {
   if (err instanceof ValidationError) {
-    let error = err.errors.map((e) => e.message);
-    next(error);
+    err.errors = err.errors.map((e) => e.message);
+    next(err);
   }
-  next()
+  next();
 });
 
 router.use((err, req, res, next) => {
