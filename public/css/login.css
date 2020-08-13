@@ -17,7 +17,6 @@ html {
     flex-direction: column;
     color: rgba(38,38,38,1);
     flex-grow:1;
-    justify-content: center;
     align-items: center;
     margin-top: 12px;
     padding: 10px 20px;
@@ -48,13 +47,17 @@ html {
     flex-direction: column;
     color: rgba(38,38,38,1);
     flex-grow:1;
-    justify-content: center;
     margin-top: 12px;
     padding: 10px 20px;
     border-radius: 5px;
     width: 100%;
 }
 
+#demo-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 input:focus {
     background-color: cadetblue;
     border: 2px solid green;
@@ -69,12 +72,16 @@ button {
     width: 80%;
 }
 
-button:active {
+/* #demoButton {
+    justify-content: center;
+    
+} */
+/* button:active {
     border: 0;
     border-radius: 5px;
     background-color: cadetblue;
     color: white;
-}
+} */
 
 button:hover {
     background-color: blue;

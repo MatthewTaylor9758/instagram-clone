@@ -23,3 +23,9 @@ block content
 
     div#new-user
       a(href="/signup") Not a user? Sign up!
+      form#demo-login
+        +authInput('', "userName")
+          input(type='hidden' name='userName' value='DemoUser')
+        +authInput('', "password")
+          input(type="hidden" name='password' value='password')
+        button(type="submit" id='demoButton') Demo Log in
