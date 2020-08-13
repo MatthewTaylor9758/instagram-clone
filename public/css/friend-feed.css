@@ -1,4 +1,27 @@
+* {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.feed {
+  margin: 180px;
+}
+h1 {
+  text-align: center;
+}
 #like-button {
-  height: 3px;
-  width: 3px;
+  margin: 300px;
+}
+#user-page-button {
+  text-align: center;
+}
+.photo {
+  margin: 20px;
+  outline: 2px grey solid;
 }

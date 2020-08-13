@@ -18,8 +18,6 @@ app.use((req, res, next) => {
 app.use("/public", express.static("public"));
 const apiRouter = require("./routes/api");
 const pagesRouter = require("./routes/pages");
-const likeRouter = require("./routes/api/likes");
-const commentRouter = require("./routes/api/comments");
 
 app.use("/api", apiRouter);
 app.use("/", pagesRouter);

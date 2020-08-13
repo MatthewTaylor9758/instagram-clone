@@ -27,6 +27,7 @@ const getCommentsForPic = async (photoId) => {
 const populateCommentList = async (photoId) => {
   const { comments } = await getCommentsForPic(photoId);
   let commentList = document.querySelector(".comment-list");
+  commentList.innerHTML = "";
   console.log(commentList);
   for (let i = 0; i < comments.length; ++i) {
     let comment = comments[i];
@@ -55,11 +56,11 @@ const populatePhotoFeed = async () => {
           <div class="photo-header">
             ${photo.User.userName}
           </div>
-          <div class="photo-contents>
-            <img class="photo" src='picture.fileLocation'>
+          <div class="photo-contents">
+            <img src=${photo.fileLocation}>
           </div>
           <div class="likes">
-              <form id="like-form" method="post" action="/api/likes">
+              <form class="like-form" method="post" action="/api/likes">
               <input type="hidden" name="pictureId" value=${photo.id}>
               <input type="hidden" name="userId" value=${photo.User.id}>
               <button #like-button type="submit"> Like!
@@ -92,7 +93,7 @@ const populatePhotoFeed = async () => {
 populatePhotoFeed();
 
 let likeButton = (totalLikes) => {
-  let likeForm = document.querySelector("#like-form");
+  let likeForm = document.querySelector(".like-form");
   let pictureId;
   likeForm.addEventListener("submit", async (e) => {
     e.preventDefault();
