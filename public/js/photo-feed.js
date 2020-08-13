@@ -59,9 +59,9 @@ const populatePhotoFeed = async () => {
         <div class="photo">
           <div class="photo-header">
             <div class="user-icon">
-            <img id="user-icon" src=${photo.fileLocation}>
+            <img class="user-icon" src=${photo.fileLocation}>
             </div>
-            <a href="/api/users/${photo.userId}">${photo.User.userName}</a>
+            <a class="userName" href="/api/users/${photo.userId}">${photo.User.userName}</a>
           </div>
           <div class="photo-contents">
             <img src=${photo.fileLocation}>

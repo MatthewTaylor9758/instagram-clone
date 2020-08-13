@@ -31,7 +31,7 @@ h1 {
   border: 0cm solid black;
   border-radius: 10%;
 }
-#user-page-button {
+.user-page-button {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   text-transform: uppercase;
@@ -47,10 +47,12 @@ h1 {
   box-shadow: 0px 0px 10px rgba(200, 200, 200, 1);
 }
 
-#user-icon {
+.user-icon {
   border-radius: 50%;
   width: 30px;
   height: 30px;
+  border: 0px black;
+  box-shadow: 0px 0px 10px rgba(200, 200, 200, 1);
 }
 .photo-header {
   flex-direction: row;
@@ -80,4 +82,15 @@ h1 {
   padding: 10px;
   margin: auto;
   width: 400px;
+}
+.logo {
+  width: 200px;
+  height: 100px;
+  overflow: visible;
+  margin: auto;
+}
+.userName {
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
 }
