@@ -29,9 +29,9 @@ h1 {
   align-content: flex-start;
   padding: 10px;
   border: 0cm solid black;
-  border-radius: 10%
+  border-radius: 10%;
 }
-#user-page-button {
+.user-page-button {
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   text-transform: uppercase;
@@ -47,40 +47,51 @@ h1 {
   box-shadow: 0px 0px 10px rgba(200, 200, 200, 1);
 }
 
-#user-icon {
+.user-icon {
   border-radius: 50%;
   width: 30px;
   height: 30px;
+  border: 0px black;
+  box-shadow: 0px 0px 10px rgba(200, 200, 200, 1);
 }
 .photo-header {
   flex-direction: row;
   justify-content: left;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: darkblue;
+  color: black;
 }
 .comment-list {
   margin-left: 10px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#totalLikes {
+.totalLikes {
   font-family: Arial, Helvetica, sans-serif;
-}
-/* .comment-form {
-  margin-left: 20px;
-  margin-right: 20px;
-} */
-.comments {
-  margin-left: 20px;
-  margin-right: 20px;
   padding: 10px;
 }
-button {
+.comments {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+}
+.comment-form {
+  flex-direction: row;
+  justify-content: center;
+}
+.comment-space {
+  padding: 10px;
+  margin: auto;
+  width: 400px;
+}
+.logo {
+  width: 200px;
+  height: 100px;
+  overflow: visible;
+  margin: auto;
+}
+.userName {
+  padding: 10px;
   font-family: Arial, Helvetica, sans-serif;
-
-.show-comments {
-  height: 20px;
-  width: 100%;
-
+  color: black;
 }
