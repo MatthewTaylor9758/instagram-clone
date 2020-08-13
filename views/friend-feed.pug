@@ -2,13 +2,14 @@ doctype
 html(lang='en')
   head
     script(src='/public/js/photo-feed.js' type="module" defer)
+    link(rel="stylesheet" href="public/css/friend-feed.css")
     meta(charset='utf-8')
     title
     div#errors-container
   body
     h1 Instagram
     div
-      a(href=`/${user.id}`) #{user.userName}'s Profile Page -- Check it out!
+      a(href=`/${user.id}` id="user-page-button") #{user.userName}'s User Page
     div
       .feed
         include includes/photo-feed.pug

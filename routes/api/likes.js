@@ -93,4 +93,14 @@ router.get(
     });
   })
 );
+
+router.delete(
+  "/:id(\\d+)",
+  routeHandler(async (req, res, next) => {
+    const likeId = parseInt(req.params.id, 10);
+    const like = await Like.findByPk(likeId);
+    await like.destroy();
+    res.status(204).end();
+  })
+);
 module.exports = router;
