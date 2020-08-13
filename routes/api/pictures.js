@@ -12,7 +12,7 @@ router.get(
       include: [
         {
           model: User,
-          attributes: ["userName", "description"],
+          attributes: ["userName"],
         },
       ],
     });
