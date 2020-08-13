@@ -58,6 +58,7 @@ h1 {
   margin-left: 10px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 #totalLikes {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -72,4 +73,9 @@ h1 {
 }
 button {
   font-family: Arial, Helvetica, sans-serif;
+
+.show-comments {
+  height: 20px;
+  width: 100%;
+
 }

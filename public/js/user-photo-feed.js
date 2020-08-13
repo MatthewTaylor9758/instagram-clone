@@ -6,11 +6,11 @@ const { User, Relationship, Comment, Like, Picture, Status } = db;
 const { getUserToken, requireAuth } = require("../utils/auth");
 
 
-const getPhotos = async () => {
-  const res = await fetch("/api/pictures/");
-  const data = await res.json();
-  return data;
-};
+// const getPhotos = async () => {
+//   const res = await fetch("/api/pictures/");
+//   const data = await res.json();
+//   return data;
+// };
 
 const populatePhotoFeed = async () => {
   const photoFeed = document.querySelector(".photo-feed");
