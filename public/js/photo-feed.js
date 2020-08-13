@@ -52,43 +52,47 @@ const populatePhotoFeed = async () => {
             <div class="user-icon">
             <img id="user-icon" src=${photo.fileLocation}>
             </div>
-            ${photo.User.userName}
+            <a href="/api/users/${photo.userId}">${photo.User.userName}
           </div>
           <div class="photo-contents">
             <img src=${photo.fileLocation}>
           </div>
           <div class="likes">
+            <div id="like-form-div">
               <form class="like-form" method="post" action="/api/likes">
               <input type="hidden" name="pictureId" value=${photo.id}>
               <input type="hidden" name="userId" value=${photo.User.id}>
               <button #like-button type="submit"> Like!
               </form>
-             <div class="totalLikes">
-                ${totalLikes} likes
+            </div>
+            <div class="unlike" hidden>
+              <div id="unlike-form-div">
+               <form class="unlike-form" method="delete" action="/api/likes/${userLike.id}">
+                <input type="hidden" name="pictureId" value=${photo.id}>
+                <input type="hidden" name="userId" value=${photo.User.id}>
+                <input type="hidden" name="likeId" value=${userLike.id}>
+                <button #unlike-button type="submit"> unlike
+                </form>
               </div>
+            </div>
+            <div id="totalLikes">
+             ${totalLikes} likes
+            </div>
           </div>
-          <div class="unlike" hidden>
-          <form class="unlike-form" method="delete" action="/api/likes/${userLike.id}">
-          <input type="hidden" name="pictureId" value=${photo.id}>
-          <input type="hidden" name="userId" value=${photo.User.id}>
-          <input type="hidden" name="likeId" value=${userLike.id}>
-          <button #unlike-button type="submit"> unlike
-          </form>
-         <div class="totalLikes">
-            ${totalLikes} likes
-          </div>
-      </div>
-          <ul class="comment-list">
-          </ul>
-          <div class="add-comment">
-          <form class="comment-form" method="delete" action="/api/comments")>
-          <input #comment-space type='text' name='content' placeholder="comment">
-          <input type="hidden" name="pictureId" value=${photo.id}>
-          <input type="hidden" name="userId" value=${photo.User.id}>
-          <button #comment-button type="submit" > Submit Comment
-          </form>
+          <div class="comments">
+            <ul class="comment-list">
+            </ul>
+            <div class="add-comment">
+            <form class="comment-form" method="delete" action="/api/comments")>
+            <input #comment-space type='text' name='content' placeholder="comment">
+            <input type="hidden" name="pictureId" value=${photo.id}>
+            <input type="hidden" name="userId" value=${photo.User.id}>
+            <button #comment-button type="submit" > Submit Comment
+            </form>
+            </div>
           </div>
       </div>
+        </div>
         </div>
       </li>
     `;
