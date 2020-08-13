@@ -52,7 +52,7 @@ const populatePhotoFeed = async () => {
             <div class="user-icon">
             <img id="user-icon" src=${photo.fileLocation}>
             </div>
-            <a href="/api/users/${photo.userId}">${photo.User.userName}
+            <a href="/api/users/${photo.userId}">${photo.User.userName}</a>
           </div>
           <div class="photo-contents">
             <img src=${photo.fileLocation}>
@@ -75,7 +75,7 @@ const populatePhotoFeed = async () => {
                 </form>
               </div>
             </div>
-            <div id="totalLikes">
+            <div class="totalLikes">
              ${totalLikes} likes
             </div>
           </div>
@@ -83,7 +83,7 @@ const populatePhotoFeed = async () => {
             <ul class="comment-list">
             </ul>
             <div class="add-comment">
-            <form class="comment-form" method="delete" action="/api/comments")>
+            <form class="comment-form" method="post" action="/api/comments">
             <input #comment-space type='text' name='content' placeholder="comment">
             <input type="hidden" name="pictureId" value=${photo.id}>
             <input type="hidden" name="userId" value=${photo.User.id}>

@@ -61,10 +61,10 @@ h1 {
 #totalLikes {
   font-family: Arial, Helvetica, sans-serif;
 }
-.comment-form {
+/* .comment-form {
   margin-left: 20px;
   margin-right: 20px;
-}
+} */
 .comments {
   margin-left: 20px;
   margin-right: 20px;
