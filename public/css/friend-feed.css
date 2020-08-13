@@ -66,8 +66,9 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#totalLikes {
+.totalLikes {
   font-family: Arial, Helvetica, sans-serif;
+  padding: 10px;
 }
 .comments {
   margin-left: 10px;
