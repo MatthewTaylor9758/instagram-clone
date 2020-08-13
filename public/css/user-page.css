@@ -1,10 +1,37 @@
-#header {
+body {
+    background-color: #fafafa;
+}
+#wrapper-div {
     display: flex;
+    width: 100%;
+    justify-content: center;
+}
+#header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right:0px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
     width: 100%;
     height: 54px;
     border: 1px solid rgba(219,219,219,1);
-    margin-left: -10;
-    margin-right: -10;
+    margin-left: 0;
+    margin-right: 0;
+    z-index: 1;
+}
+a {
+    text-decoration: none;
+}
+#friends {
+    display: flex;
+    align-self: center;
+}
+#logout {
+    display: flex;
+    align-self: center;
+    text-decoration: none;
 }
 #font {
     display: flex;
@@ -13,16 +40,114 @@
     height: 100px;
     overflow: visible;
 }
-#font, #images, #logout, #delete, #friends {
+
+#image-form {
+    display: flex;
+    box-sizing: border-box;
+    position: absolute;
+    justify-content: center;
+    top: 70px;
+    height: 150px;
+    width: 100%;
+}
+#add-image-form {
     display: flex;
     flex-direction: column;
-    margin: 0px 222px;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
 }
-
-#image {
-    width: 50%
+#image-location {
+    width: 60%;
 }
-
+#image-description {
+    width: 100%;
+    margin: 5px 0;
+}
+img {
+    width: 300px;
+    height: auto;
+    padding: 20px 0;
+}
+#user-info {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+#user-photo + p {
+    padding-left: 10px;
+    font-size: 1.5rem;
+    display: flex;
+    align-self: flex-end;
+}
+#user-photo {
+    padding: 0;
+    width: auto;
+    height: 100%;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+#images {
+    border-top: 2px solid rgba(219,219,219,1);
+    padding-top: 20px;
+    position: relative;
+    top: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+#image-tile {
+    display: flex;
+    flex-direction: column;
+}
+img + p {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+p + button {
+    margin: 0 auto;
+    background-color: lightcoral;
+    border: none;
+    border-radius: 5px;
+}
+p + button:hover {
+    background-color: red;
+}
+svg {
+    padding-left: 50px;
+}
 .instafont {
     overflow: visible;
 }
+#images div {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    border: 1px solid rgba(219,219,219,1);
+    border-radius: 10%;
+    margin: 5px;
+    padding: 5px;
+}
+#images div:hover {
+    border: 1px solid rgb(170, 170, 170);
+    box-shadow: 0px 0px 10px rgba(200,200,200,1);
+}
+
+/* #font, #images, #logout, #delete, #friends {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 222px;
+} */
+/* #add-photo-button {
+    background-color: cadetblue;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+} */
+/* #add-photo-button:hover {
+    background-color: darkblue;
+    color: rgb(228, 226, 226);
+} */

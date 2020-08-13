@@ -12,9 +12,10 @@ window.addEventListener('click', async (e) => {
         'Content-type': 'application/json'
       }
     })
-    // window.location.href = `/${User.id}`;
+    window.location.href = window.location.pathname;
     // const pic = await res.text();
     // console.log(pic);
   }
   // console.log(e.target.id);
 })
+// console.log(window);
