@@ -71,7 +71,7 @@ const populatePhotoFeed = async () => {
               <form class="like-form" method="post" action="/api/likes">
               <input type="hidden" name="pictureId" value=${photo.id}>
               <input type="hidden" name="userId" value=${photo.User.id}>
-              <button #like-button type="submit"> Like!
+              <button class="btn btn-outline-dark"" #like-button type="submit"> Like!
               </form>
             </div>
             <div class="unlike" hidden>
@@ -80,7 +80,7 @@ const populatePhotoFeed = async () => {
                 <input type="hidden" name="pictureId" value=${photo.id}>
                 <input type="hidden" name="userId" value=${photo.User.id}>
                 <input type="hidden" name="likeId" value=${userLike.id}>
-                <button #unlike-button type="submit"> unlike
+                <button class="btn btn-outline-dark" #unlike-button type="submit"> unlike
                 </form>
               </div>
             </div>
@@ -95,10 +95,10 @@ const populatePhotoFeed = async () => {
             <div class="show-comments" action="/api/comments">
             </div>
             <form class="comment-form" method="post" action="/api/comments">
-            <input #comment-space type='text' name='content' placeholder="comment">
+            <input class="comment-space" type='text' name='content' placeholder="comment">
             <input type="hidden" name="pictureId" value=${photo.id}>
             <input type="hidden" name="userId" value=${photo.User.id}>
-            <button #comment-button type="submit" > Submit Comment
+            <button class="btn btn-outline-dark" #comment-button type="submit" > Submit Comment
             </form>
             </div>
        </div>

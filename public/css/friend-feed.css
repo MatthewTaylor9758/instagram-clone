@@ -29,7 +29,7 @@ h1 {
   align-content: flex-start;
   padding: 10px;
   border: 0cm solid black;
-  border-radius: 10%
+  border-radius: 10%;
 }
 #user-page-button {
   text-align: center;
@@ -57,7 +57,7 @@ h1 {
   justify-content: left;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: darkblue;
+  color: black;
 }
 .comment-list {
   margin-left: 10px;
@@ -67,20 +67,17 @@ h1 {
 #totalLikes {
   font-family: Arial, Helvetica, sans-serif;
 }
-/* .comment-form {
-  margin-left: 20px;
-  margin-right: 20px;
-} */
 .comments {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
   padding: 10px;
 }
-button {
-  font-family: Arial, Helvetica, sans-serif;
-
-.show-comments {
-  height: 20px;
-  width: 100%;
-
+.comment-form {
+  flex-direction: row;
+  justify-content: center;
+}
+.comment-space {
+  padding: 10px;
+  margin: auto;
+  width: 400px;
 }
