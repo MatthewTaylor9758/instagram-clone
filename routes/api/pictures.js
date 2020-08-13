@@ -25,7 +25,10 @@ router.get(
   routeHandler(async (req, res, next) => {
     const pictureId = parseInt(req.params.id, 10);
     const picture = await Picture.findByPk(pictureId, {
-      include: { model: User, attributes: "userName" },
+      include: [
+        { model: User, attributes: ["userName"] },
+        { model: Comment, attributes: ["userId", "content"] },
+      ],
     });
     res.json({ picture });
   })
