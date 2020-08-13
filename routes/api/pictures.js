@@ -28,6 +28,7 @@ router.get(
       include: [
         { model: User, attributes: ["userName"] },
         { model: Comment, attributes: ["userId"] },
+        { model: Like },
       ],
     });
     res.json({ picture });

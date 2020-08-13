@@ -10,7 +10,8 @@ ul {
   padding: 0;
 }
 .feed {
-  margin: 180px;
+  margin-left: 180px;
+  margin-right: 180px;
 }
 h1 {
   text-align: center;
@@ -20,8 +21,26 @@ h1 {
 }
 #user-page-button {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: capitalize;
 }
 .photo {
   margin: 20px;
-  outline: 2px grey solid;
+  outline: 1px grey solid;
+}
+#user-icon {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+.photo-header {
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkblue;
+}
+.comment-list {
+  margin-left: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
