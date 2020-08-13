@@ -13,7 +13,6 @@ form.addEventListener("submit", async (e) => {
     },
   });
 
-  
   const data = await res.json();
   if (!res.ok) {
     const { message } = data;
@@ -21,7 +20,7 @@ form.addEventListener("submit", async (e) => {
     errorsContainer.innerHTML = message;
     return;
   }
-  
+
   window.location.href = "/";
 });
 
@@ -39,14 +38,15 @@ demoLogin.addEventListener("submit", async (e) => {
       "Content-type": "application/json",
     },
   });
-
+  console.log(res);
   const data = await res.json();
+
   if (!res.ok) {
     const { message } = data;
     const errorsContainer = document.querySelector("#errors-container");
     errorsContainer.innerHTML = message;
     return;
   }
-  
+
   window.location.href = "/";
 });

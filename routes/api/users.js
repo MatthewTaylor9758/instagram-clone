@@ -25,13 +25,10 @@ const validateAuthFields = [
     .isLength({ min: 5, max: 70 })
     .custom((value, { req }) => value === req.body.password),
 ];
-router.get(
-  '/',
-  async(req, res, next) => {
-    const users = await User.findAll();
-    res.json({ users });
-  }
-)
+router.get("/", async (req, res, next) => {
+  const users = await User.findAll();
+  res.json({ users });
+});
 router.get(
   "/:id(\\d+)",
   routeHandler(async (req, res, next) => {
@@ -41,7 +38,7 @@ router.get(
         id,
       },
     });
-    console.log('user', user);
+    console.log("user", user);
     const pictures = await Picture.findAll({
       where: {
         userId: user.id,
@@ -89,7 +86,7 @@ router.post(
       isPrivate: false,
     });
     const token = await getUserToken(user);
-    console.log(user)
+    console.log(user);
     res.cookie("token", token, { maxAge: expiresIn * 1000 });
     res.json({ id: user.id, token });
   })
