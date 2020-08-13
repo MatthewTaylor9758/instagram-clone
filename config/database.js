@@ -15,4 +15,8 @@ module.exports = {
     dialect: "postgres",
     seederStorage: "sequelize",
   },
+  production: {
+    dialect: "postgres",
+    use_env_variable: "DATABASE_URL",
+  },
 };
