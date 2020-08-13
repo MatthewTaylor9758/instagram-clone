@@ -34,8 +34,17 @@ const populateCommentList = async (photoId) => {
     commentLi.innerHTML = `${comment.User.userName} ${comment.content}`;
     commentList.appendChild(commentLi);
   }
+  
   return commentList;
 };
+
+const hideComments = async (photoId) => {
+  let commentList = document.querySelector(".comment-list");
+  if(!commentList.innerHTML === ""){
+    commentList.innerHTML = "";
+  }
+  return commentList;
+}
 
 const populatePhotoFeed = async () => {
   const photoFeed = document.querySelector(".photo-feed");
@@ -68,10 +77,10 @@ const populatePhotoFeed = async () => {
               </div>
           </div>
           <div class="unlike" hidden>
-          <form class="unlike-form" method="delete" action="/api/likes/${userLike.id}">
+          <form class="unlike-form" method="delete" action="/api/likes/${userLike}">
           <input type="hidden" name="pictureId" value=${photo.id}>
           <input type="hidden" name="userId" value=${photo.User.id}>
-          <input type="hidden" name="likeId" value=${userLike.id}>
+          <input type="hidden" name="likeId" value=${userLike}>
           <button #unlike-button type="submit"> unlike
           </form>
          <div class="totalLikes">
@@ -81,6 +90,8 @@ const populatePhotoFeed = async () => {
           <ul class="comment-list">
           </ul>
           <div class="add-comment">
+          <div class="show-comments" action="/api/comments">
+          </div>
           <form class="comment-form" method="delete" action="/api/comments")>
           <input #comment-space type='text' name='content' placeholder="comment">
           <input type="hidden" name="pictureId" value=${photo.id}>
@@ -96,6 +107,7 @@ const populatePhotoFeed = async () => {
     await populateCommentList(photo.id);
     await likeButton(totalLikes);
     await commentButton();
+    await showComment();
   }
 };
 
@@ -159,6 +171,29 @@ let commentButton = () => {
       return;
     }
     await populateCommentList(pictureId);
+  });
+};
+let showComment = () => {
+  let commentForm = document.querySelector(".comment-form");
+  let showCommentButton = document.querySelector(".show-comments")
+  let pictureId;
+  showCommentButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(commentForm);
+    const userId = formData.get("userId");
+    pictureId = formData.get("pictureId");
+    const content = formData.get("content");
+    const body = { userId, pictureId, content };
+    const res = await fetch("/api/comments");
+    const data = await res.json();
+    if (!res.ok) {
+      const { message } = data;
+      const errorsContainer = document.querySelector("#errors-container");
+      errorsContainer.innerHTML = message;
+      return;
+    }
+    await populateCommentList(pictureId);
+    await hideComments(pictureId);
   });
 };
 
