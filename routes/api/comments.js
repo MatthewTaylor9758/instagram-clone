@@ -50,6 +50,8 @@ router.get(
   routeHandler(async (req, res, next) => {
     const pictureId = parseInt(req.params.id, 10);
     const comments = await Comment.findAll({
+      limit: 10,
+      order: [["createdAt", "DESC"]],
       where: {
         pictureId,
       },
@@ -63,6 +65,16 @@ router.get(
     res.json({
       comments,
     });
+  })
+);
+
+router.delete(
+  "/:id(\\d+)",
+  routeHandler(async (req, res, next) => {
+    const commentId = parseInt(req.params.id, 10);
+    const comment = await Comment.findByPk(commentId);
+    await comment.destroy();
+    res.status(204).end();
   })
 );
 module.exports = router;

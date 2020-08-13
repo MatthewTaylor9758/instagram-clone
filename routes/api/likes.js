@@ -60,9 +60,6 @@ router.get(
   "/:id(\\d+)",
   routeHandler(async (req, res, next) => {
     const pictureId = parseInt(req.params.id, 10);
-    const picture = await Picture.findByPk(pictureId, {
-      include: { model: User, model: Comment },
-    });
     const user = await User.findOne({
       where: {
         id: await parseInt(req.cookies.user),
@@ -85,13 +82,25 @@ router.get(
       },
     });
     let totalLikes = 0;
-    totalLikes = parseInt(likes.forEach((like) => totalLikes++));
+    for (let i = 0; i < likes.length; ++i) {
+      totalLikes++;
+    }
     res.json({
       user,
       likes,
       userLike,
       totalLikes,
     });
+  })
+);
+
+router.delete(
+  "/:id(\\d+)",
+  routeHandler(async (req, res, next) => {
+    const likeId = parseInt(req.params.id, 10);
+    const like = await Like.findByPk(likeId);
+    await like.destroy();
+    res.status(204).end();
   })
 );
 module.exports = router;

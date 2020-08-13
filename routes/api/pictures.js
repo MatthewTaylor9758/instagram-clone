@@ -27,7 +27,10 @@ router.get(
     const picture = await Picture.findByPk(pictureId, {
       include: [
         { model: User, attributes: ["userName"] },
+
         { model: Comment, attributes: ["userId", 'content'] },
+
+        { model: Like },
       ],
     });
     res.json({ picture });
