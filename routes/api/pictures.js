@@ -27,7 +27,9 @@ router.get(
     const picture = await Picture.findByPk(pictureId, {
       include: [
         { model: User, attributes: ["userName"] },
-        { model: Comment, attributes: ["userId"] },
+
+        { model: Comment, attributes: ["userId", 'content'] },
+
         { model: Like },
       ],
     });
@@ -39,7 +41,11 @@ router.delete(
   "/:id(\\d+)",
   routeHandler(async (req, res, next) => {
     const pictureId = parseInt(req.params.id, 10);
-    const picture = await Picture.findByPk(pictureId);
+    const picture = await Picture.findByPk(pictureId, {
+      include: [
+        { model: User }
+      ]
+    });
     console.log("picture", picture);
     await picture.destroy();
     res.status(204).end();
