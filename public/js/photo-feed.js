@@ -34,17 +34,17 @@ const populateCommentList = async (photoId) => {
     commentLi.innerHTML = `${comment.User.userName} ${comment.content}`;
     commentList.appendChild(commentLi);
   }
-  
+
   return commentList;
 };
 
 const hideComments = async (photoId) => {
   let commentList = document.querySelector(".comment-list");
-  if(!commentList.innerHTML === ""){
+  if (!commentList.innerHTML === "") {
     commentList.innerHTML = "";
   }
   return commentList;
-}
+};
 
 const populatePhotoFeed = async () => {
   const photoFeed = document.querySelector(".photo-feed");
@@ -92,6 +92,8 @@ const populatePhotoFeed = async () => {
             <ul class="comment-list">
             </ul>
             <div class="add-comment">
+            <div class="show-comments" action="/api/comments">
+            </div>
             <form class="comment-form" method="post" action="/api/comments">
             <input #comment-space type='text' name='content' placeholder="comment">
             <input type="hidden" name="pictureId" value=${photo.id}>
@@ -99,31 +101,7 @@ const populatePhotoFeed = async () => {
             <button #comment-button type="submit" > Submit Comment
             </form>
             </div>
-
-          <div class="unlike" hidden>
-          <form class="unlike-form" method="delete" action="/api/likes/${userLike}">
-          <input type="hidden" name="pictureId" value=${photo.id}>
-          <input type="hidden" name="userId" value=${photo.User.id}>
-          <input type="hidden" name="likeId" value=${userLike}>
-          <button #unlike-button type="submit"> unlike
-          </form>
-         <div class="totalLikes">
-            ${totalLikes} likes
-          </div>
-      </div>
-          <ul class="comment-list">
-          </ul>
-          <div class="add-comment">
-          <div class="show-comments" action="/api/comments">
-          </div>
-          <form class="comment-form" method="delete" action="/api/comments")>
-          <input #comment-space type='text' name='content' placeholder="comment">
-          <input type="hidden" name="pictureId" value=${photo.id}>
-          <input type="hidden" name="userId" value=${photo.User.id}>
-          <button #comment-button type="submit" > Submit Comment
-          </form>
-          </div>
-      </div>
+       </div>
         </div>
         </div>
       </li>
@@ -200,7 +178,7 @@ let commentButton = () => {
 };
 let showComment = () => {
   let commentForm = document.querySelector(".comment-form");
-  let showCommentButton = document.querySelector(".show-comments")
+  let showCommentButton = document.querySelector(".show-comments");
   let pictureId;
   showCommentButton.addEventListener("click", async (e) => {
     e.preventDefault();
