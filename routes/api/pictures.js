@@ -28,7 +28,7 @@ router.get(
       include: [
         { model: User, attributes: ["userName"] },
 
-        { model: Comment, attributes: ["userId", 'content'] },
+        { model: Comment, attributes: ["id", "userId", 'content'] },
 
         { model: Like },
       ],

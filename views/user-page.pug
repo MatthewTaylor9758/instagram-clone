@@ -34,4 +34,5 @@ html(lang='en')
             img(src=picture.fileLocation)
             p #{picture.description}
             //- p #{picture.id}
-            button(type='submit' id=`delete-button-${picture.id}`) Delete
+            //- button(type='submit' id=`delete-button-${picture.id}`) Delete
+            input(type='image' src='public/images/trash-can.png' id=`delete-button-${picture.id}`)
