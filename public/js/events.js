@@ -12,9 +12,9 @@ window.addEventListener('click', async (e) => {
         'Content-type': 'application/json'
       }
     })
-    // window.location.href = window.location.pathname;
-    const pic = await res.text();
-    console.log(pic);
+    window.location.href = window.location.pathname;
+    // const pic = await res.text();
+    // console.log(pic);
   }
   // console.log(e.target.id);
 })

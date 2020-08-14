@@ -160,6 +160,9 @@ img p input {
 }
 #description-input-wrapper{
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#description-input-wrapper + p {
+    background-color: red;
 }

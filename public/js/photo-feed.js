@@ -176,13 +176,18 @@ let showComment = () => {
 // };
 const likeButton = () => {
   window.addEventListener('submit', async (e) => {
+    // console.log('testing 1')
+    e.preventDefault();
+    // console.log('testing 2')
     let regex = /like-form-\d+/;
-    console.log(e.target);
-    if (regex.test(e.target.class)) {
+    // let random = e.target.classList;
+    // console.log(random.keys());
+    console.log(e.target.className);
+    if (regex.test(e.target.className)) {
       console.log('start of the thing');
-      let pictureId = e.target.class.slice(11, e.target.class.length);
+      let pictureId = parseInt(e.target.className.slice(10, e.target.className.length), 10);
       console.log(pictureId);
-      const userId = cookie.user;
+      const userId = 1;
       const body = { userId, pictureId };
       console.log("before fetch")
       const res = await fetch("/api/likes", {
