@@ -154,3 +154,12 @@ img p input {
     background-color: darkblue;
     color: rgb(228, 226, 226);
 } */
+.trash{
+    width: 30px;
+    height: 30px;
+}
+#description-input-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
