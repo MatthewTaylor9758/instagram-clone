@@ -14,6 +14,7 @@ router.post(
       userId,
     });
     res.json({ like });
+    // res.redirect('/');
   })
 );
 router.get(
