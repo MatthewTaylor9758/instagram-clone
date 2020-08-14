@@ -85,12 +85,12 @@ const populatePhotoFeed = async () => {
                 </form>
               </div>
             </div>
-            <div class="totalLikes-${photo.id}">
+            <div id="totalLikes" class="totalLikes-${photo.id}">
              ${totalLikes} likes
             </div>
           </div>
           <div class="comments">
-            <ul class="comment-list-${photo.id}">
+            <ul id="comment-list" class="comment-list-${photo.id}">
             </ul>
             <div class="add-comment">
             <div class="show-comments" action="/api/comments">
@@ -175,10 +175,8 @@ let showComment = () => {
 //   });
 // };
 const likeButton = () => {
-  console.log('adding event listener');
   window.addEventListener('submit', async (e) => {
     let regex = /like-form-\d+/;
-    // e.preventDefault();
     console.log(e.target);
     if (regex.test(e.target.class)) {
       console.log('start of the thing');
