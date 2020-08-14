@@ -14,7 +14,8 @@ router.post(
       userId,
       pictureId,
     });
-    res.json({ comment });
+    // res.json({ comment });
+    res.redirect('/');
   })
 );
 router.get(

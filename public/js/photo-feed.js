@@ -27,7 +27,7 @@ const getCommentsForPic = async (photoId) => {
 const populateCommentList = async (photoId) => {
   const { comments } = await getCommentsForPic(photoId);
   let commentList = document.querySelector(".comment-list");
-  commentList.innerHTML = "";
+  // commentList.innerHTML = "";
   for (let i = 0; i < comments.length; ++i) {
     let comment = comments[i];
     let commentLi = document.createElement("li");
@@ -68,7 +68,7 @@ const populatePhotoFeed = async () => {
           </div>
           <div class="likes">
             <div id="like-form-div">
-              <form class="like-form" method="post" action="/api/likes">
+              <form class="like-form-${photo.id}" method="post" action="/api/likes">
               <input type="hidden" name="pictureId" value=${photo.id}>
               <input type="hidden" name="userId" value=${photo.User.id}>
               <button class="btn btn-outline-dark"" #like-button-${userLike.id} type="submit"> Like!
@@ -173,12 +173,14 @@ let showComment = () => {
 //   });
 // };
 const likeButton = () =>{
-  window.addEventListener('click', async (e) => {
-    let regex = /like-button-\d+/;
+  console.log('adding event listener');
+  window.addEventListener('submit', async (e) => {
+    let regex = /like-form-\d+/;
     // e.preventDefault();
-  // console.log(User.id);
-  if (regex.test(e.target.id)) {
-    let pictureId = e.target.id.slice(11, e.target.id.length);
+    console.log(e.target);
+  if (regex.test(e.target.class)) {
+    console.log('start of the thing');
+    let pictureId = e.target.class.slice(11, e.target.class.length);
     console.log(pictureId);
     const userId = cookie.user;
     const body = { userId, pictureId };
@@ -191,7 +193,7 @@ const likeButton = () =>{
       },
     });
     console.log("after fetch")
-    e.preventDefault()
+
     const data = await res.json();
     if (!res.ok) {
       const { message } = data;

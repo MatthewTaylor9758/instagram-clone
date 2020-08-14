@@ -13,8 +13,8 @@ router.post(
       pictureId,
       userId,
     });
-    res.json({ like });
-    // res.redirect('/');
+    // res.json({ like });
+    res.redirect('/');
   })
 );
 router.get(
