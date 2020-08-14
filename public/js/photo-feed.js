@@ -24,9 +24,19 @@ const getCommentsForPic = async (photoId) => {
   return data;
 };
 
+
+
+const hideComments = async (photoId) => {
+  let commentList = document.querySelector(".comment-list");
+  if (!commentList.innerHTML === "") {
+    commentList.innerHTML = "";
+  }
+  return commentList;
+};
+
 const populateCommentList = async (photoId) => {
   const { comments } = await getCommentsForPic(photoId);
-  let commentList = document.querySelector(".comment-list");
+  let commentList = document.querySelector(`.comment-list-${photoId}`);
   // commentList.innerHTML = "";
   for (let i = 0; i < comments.length; ++i) {
     let comment = comments[i];
@@ -37,15 +47,6 @@ const populateCommentList = async (photoId) => {
 
   return commentList;
 };
-
-const hideComments = async (photoId) => {
-  let commentList = document.querySelector(".comment-list");
-  if (!commentList.innerHTML === "") {
-    commentList.innerHTML = "";
-  }
-  return commentList;
-};
-
 const populatePhotoFeed = async () => {
   const photoFeed = document.querySelector(".photo-feed");
   const { pictures } = await getPhotos();
@@ -89,7 +90,7 @@ const populatePhotoFeed = async () => {
             </div>
           </div>
           <div class="comments">
-            <ul class="comment-list">
+            <ul class="comment-list-${photo.id}">
             </ul>
             <div class="add-comment">
             <div class="show-comments" action="/api/comments">
@@ -107,6 +108,7 @@ const populatePhotoFeed = async () => {
       </li>
     `;
     photoFeed.innerHTML += photoLi;
+
     await populateCommentList(photo.id);
     await likeButton(totalLikes);
     await commentButton();
@@ -172,74 +174,76 @@ let showComment = () => {
 //     likeEle.innerHTML = `${totalLikes} likes`;
 //   });
 // };
-const likeButton = () =>{
+const likeButton = () => {
   console.log('adding event listener');
   window.addEventListener('submit', async (e) => {
     let regex = /like-form-\d+/;
     // e.preventDefault();
     console.log(e.target);
-  if (regex.test(e.target.class)) {
-    console.log('start of the thing');
-    let pictureId = e.target.class.slice(11, e.target.class.length);
-    console.log(pictureId);
-    const userId = cookie.user;
-    const body = { userId, pictureId };
-    console.log("before fetch")
-    const res = await fetch("/api/likes", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-       "Content-type": "application/json",
-      },
-    });
-    console.log("after fetch")
+    if (regex.test(e.target.class)) {
+      console.log('start of the thing');
+      let pictureId = e.target.class.slice(11, e.target.class.length);
+      console.log(pictureId);
+      const userId = cookie.user;
+      const body = { userId, pictureId };
+      console.log("before fetch")
+      const res = await fetch("/api/likes", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      console.log("after fetch")
 
-    const data = await res.json();
-    if (!res.ok) {
-      const { message } = data;
-      const errorsContainer = document.querySelector("#errors-container");
-      errorsContainer.innerHTML = message;
-      return;
-    }
+      const data = await res.json();
+      if (!res.ok) {
+        const { message } = data;
+        const errorsContainer = document.querySelector("#errors-container");
+        errorsContainer.innerHTML = message;
+        return;
+      }
 
 
-    let likeEle = document.querySelector(`.totalLikes-${pictureId}`);
-    let likes = await getLikesForPic(pictureId);
-    let totalLikes = 0;
-    if (likes){
-    totalLikes = likes.length;
+      let likeEle = document.querySelector(`.totalLikes-${pictureId}`);
+      let likes = await getLikesForPic(pictureId);
+      let totalLikes = 0;
+      if (likes) {
+        totalLikes = likes.length;
+      }
+      likeEle.innerHTML = `${totalLikes} likes`;
     }
-     likeEle.innerHTML = `${totalLikes} likes`;
-    }
-    });
-  };
+  });
+};
 
-  const commentButton = () => {
-    window.addEventListener('click', async (e) => {
-      let regex = /comment-form-\d+/;
-      if (regex.test(e.target.id)) {
-        console.log(e.target.id)
-        let photoId = e.target.id.slice(15, e.target.id.length);
-        console.log(photoId);
-        e.preventDefault();
-    let commentForm = document.querySelector(`#comment-form-${photoId}`);
-    const formData = new FormData(commentForm);
-    const userId = formData.get("userId");
-    const content = formData.get("content");
-    const body = { userId, photoId, content };
-    const res = await fetch("/api/comments", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      const { message } = data;
-      const errorsContainer = document.querySelector("#errors-container");
-      errorsContainer.innerHTML = message;
-      return;
+const commentButton = () => {
+  window.addEventListener('click', async (e) => {
+    let regex = /comment-form-\d+/;
+    if (regex.test(e.target.id)) {
+      console.log(e.target.id)
+      let photoId = e.target.id.slice(15, e.target.id.length);
+      console.log(photoId);
+      e.preventDefault();
+      let commentForm = document.querySelector(`#comment-form-${photoId}`);
+      const formData = new FormData(commentForm);
+      const userId = formData.get("userId");
+      const content = formData.get("content");
+      const body = { userId, photoId, content };
+      const res = await fetch("/api/comments", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        const { message } = data;
+        const errorsContainer = document.querySelector("#errors-container");
+        errorsContainer.innerHTML = message;
+        return;
+      }
+      await populateCommentList(pictureId);
     }
-    await populateCommentList(pictureId);
-  }})};
+  })
+};
