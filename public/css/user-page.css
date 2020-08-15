@@ -158,11 +158,11 @@ img p input {
     width: 30px;
     height: 30px;
 }
-#description-input-wrapper{
+#description-input-wrapper.description-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-#description-input-wrapper + p {
+div#description-input-wrapper + p {
     background-color: red;
 }
