@@ -35,7 +35,7 @@ const hideComments = async (photoId) => {
 const populateCommentList = async (photoId) => {
   const { comments } = await getCommentsForPic(photoId);
   let commentList = document.querySelector(`.comment-list-${photoId}`);
-  // commentList.innerHTML = "";
+  commentList.innerHTML = "";
   for (let i = 0; i < comments.length; ++i) {
     let comment = comments[i];
     let commentLi = document.createElement("li");
@@ -94,7 +94,7 @@ const populatePhotoFeed = async () => {
             <div class="show-comments" action="/api/comments">
             </div>
             <form class="comment-form-${photo.id}" id="comment-form-${photo.Id}" method="post" action="/api/comments">
-            <input class="comment-space" type='text' name='content' placeholder="comment">
+            <input class="comment-space-${photo.id}" type='text' name='content' placeholder="comment">
             <input type="hidden" name="pictureId" value=${photo.id}>
             <input type="hidden" name="userId" value=${photo.User.id}>
             <button class="btn btn-outline-dark" #comment-button-${photo.id} type="submit" > Submit Comment
@@ -304,14 +304,16 @@ window.addEventListener("submit", async (e) => {
   let regex2 = /comment-form-\d+/;
   if (regex2.test(e.target.className)) {
     console.log(e.target.className);
-    let photoId = e.target.className.slice(13, e.target.id.length);
-    console.log(photoId);
-    e.preventDefault();
-    let commentForm = document.querySelector(`#comment-form-${photoId}`);
-    const formData = new FormData(commentForm);
-    const userId = formData.get("userId");
-    const content = formData.get("content");
-    const body = { userId, photoId, content };
+    let pictureId = e.target.className.slice(13, e.target.id.length);
+    console.log(pictureId);
+    // e.preventDefault();
+    let commentForm = document.querySelector(`#comment-form-${pictureId}`);
+    let commentContent = document.querySelector(`.comment-space-${pictureId}`);
+    let content = commentContent.value;
+    // const formData = new FormData(commentForm);
+    const userId = 1;
+    // const content = formData.get("content");
+    const body = { userId, pictureId, content };
     const res = await fetch("/api/comments", {
       method: "POST",
       body: JSON.stringify(body),
@@ -319,7 +321,7 @@ window.addEventListener("submit", async (e) => {
         "Content-type": "application/json",
       },
     });
-    const data = await res.json();
+    const data = await res.text();
     if (!res.ok) {
       const { message } = data;
       const errorsContainer = document.querySelector("#errors-container");

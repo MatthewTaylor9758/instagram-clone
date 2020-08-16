@@ -10,12 +10,12 @@ router.post(
     const { content, pictureId } = req.body;
     const userId = await parseInt(req.cookies.user);
     const comment = await Comment.create({
-      content,
-      userId,
       pictureId,
+      userId,
+      content,
     });
     // res.json({ comment });
-    res.redirect('/');
+    res.redirect("/");
   })
 );
 router.get(
