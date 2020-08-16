@@ -13,6 +13,7 @@ module.exports = {
      */
     await queryInterface.bulkInsert("Likes", [
       { pictureId: 1, userId: 1, createdAt: new Date(), updatedAt: new Date() },
+      // { pictureId: 2, userId: 2, createdAt: new Date(), updatedAt: new Date() },
     ]);
   },
 

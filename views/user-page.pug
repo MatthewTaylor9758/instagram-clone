@@ -32,7 +32,7 @@ html(lang='en')
         each picture in pictures
           div(id=`photo-${picture.id}` class="photo-div")
             img(src=picture.fileLocation)
-            div(id= "description-input-wrapper")
+            div(id= "description-input-wrapper" class='description-wrapper')
               p(id=`picture-description-${picture.id}`) #{picture.description}
               //- p #{picture.id}
               //- button(type='submit' id=`delete-button-${picture.id}`) Delete
