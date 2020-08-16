@@ -24,8 +24,6 @@ const getCommentsForPic = async (photoId) => {
   return data;
 };
 
-
-
 const hideComments = async (photoId) => {
   let commentList = document.querySelector(".comment-list");
   if (!commentList.innerHTML === "") {
@@ -95,7 +93,7 @@ const populatePhotoFeed = async () => {
             <div class="add-comment">
             <div class="show-comments" action="/api/comments">
             </div>
-            <form class="comment-form" id="comment-form-${photo.Id}" method="post" action="/api/comments">
+            <form class="comment-form-${photo.id}" id="comment-form-${photo.Id}" method="post" action="/api/comments">
             <input class="comment-space" type='text' name='content' placeholder="comment">
             <input type="hidden" name="pictureId" value=${photo.id}>
             <input type="hidden" name="userId" value=${photo.User.id}>
@@ -111,36 +109,36 @@ const populatePhotoFeed = async () => {
 
     await populateCommentList(photo.id);
     // await likeButton(totalLikes);
-    await commentButton();
-    await showComment();
+    // await commentButton();
+    // await showComment();
   }
 };
 
 populatePhotoFeed();
 
-let showComment = () => {
-  let commentForm = document.querySelector(".comment-form");
-  let showCommentButton = document.querySelector(".show-comments");
-  let pictureId;
-  showCommentButton.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(commentForm);
-    const userId = formData.get("userId");
-    pictureId = formData.get("pictureId");
-    const content = formData.get("content");
-    const body = { userId, pictureId, content };
-    const res = await fetch("/api/comments");
-    const data = await res.json();
-    if (!res.ok) {
-      const { message } = data;
-      const errorsContainer = document.querySelector("#errors-container");
-      errorsContainer.innerHTML = message;
-      return;
-    }
-    await populateCommentList(pictureId);
-    await hideComments(pictureId);
-  });
-};
+// let showComment = () => {
+//   let commentForm = document.querySelector(".comment-form");
+//   let showCommentButton = document.querySelector(".show-comments");
+//   let pictureId;
+//   showCommentButton.addEventListener("click", async (e) => {
+//     e.preventDefault();
+//     const formData = new FormData(commentForm);
+//     const userId = formData.get("userId");
+//     pictureId = formData.get("pictureId");
+//     const content = formData.get("content");
+//     const body = { userId, pictureId, content };
+//     const res = await fetch("/api/comments");
+//     const data = await res.json();
+//     if (!res.ok) {
+//       const { message } = data;
+//       const errorsContainer = document.querySelector("#errors-container");
+//       errorsContainer.innerHTML = message;
+//       return;
+//     }
+//     await populateCommentList(pictureId);
+//     await hideComments(pictureId);
+//   });
+// };
 
 // let unlikeButton = (totalLikes) => {
 //   let unlikeForm = document.querySelector(".unlike-form");
@@ -175,66 +173,64 @@ let showComment = () => {
 //   });
 // };
 
-
-
 // const likeButton = () => {
-  window.addEventListener('submit', async (e) => {
-    // console.log('testing 1')
-    e.preventDefault();
-    // console.log('testing 2')
-    let regex = /like-form-\d+/;
-    // let random = e.target.classList;
-    // console.log(random.keys());
-    console.log(e.target.className);
-    if (regex.test(e.target.className)) {
-      let pictureId = parseInt(e.target.className.slice(10, e.target.className.length), 10);
-      console.log(pictureId);
-      let likeData = await getLikesForPic(pictureId);
-      console.log(likeData);
-      let testArr = [];
-      const body = {
-        body: likeData.user.id,
-        pictureId
-      };
-      if (likeData.likes.length === 0) {
-        console.log(testArr);
-        console.log('start of the thing');
-        const userId = 1;
-        console.log("before fetch")
-        const res = await fetch("/api/likes", {
-          method: "POST",
-          body: JSON.stringify(body),
-          headers: {
-            "Content-type": "application/json",
-          },
-        });
-        console.log("after fetch")
+window.addEventListener("submit", async (e) => {
+  // console.log('testing 1')
+  e.preventDefault();
+  // console.log('testing 2')
+  let regex = /like-form-\d+/;
+  // let random = e.target.classList;
+  // console.log(random.keys());
+  console.log(e.target.className);
+  if (regex.test(e.target.className)) {
+    let pictureId = parseInt(
+      e.target.className.slice(10, e.target.className.length),
+      10
+    );
+    console.log(pictureId);
+    let likeData = await getLikesForPic(pictureId);
+    console.log(likeData);
+    let testArr = [];
+    const body = {
+      body: likeData.user.id,
+      pictureId,
+    };
+    if (likeData.likes.length === 0) {
+      console.log(testArr);
+      console.log("start of the thing");
+      const userId = 1;
+      console.log("before fetch");
+      const res = await fetch("/api/likes", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      console.log("after fetch");
 
-        const data = await res.json();
-        if (!res.ok) {
-          const { message } = data;
-          const errorsContainer = document.querySelector("#errors-container");
-          errorsContainer.innerHTML = message;
-          return;
-        }
-      } else {
-        let photoLike;
-        for (let i = 0; i < likeData.likes.length; i++) {
-          if (likeData.likes[i].userId === likeData.user.id) {
-            photoLike = likeData.likes[i].id;
-
-
-
+      const data = await res.json();
+      if (!res.ok) {
+        const { message } = data;
+        const errorsContainer = document.querySelector("#errors-container");
+        errorsContainer.innerHTML = message;
+        return;
+      }
+    } else {
+      let photoLike;
+      for (let i = 0; i < likeData.likes.length; i++) {
+        if (likeData.likes[i].userId === likeData.user.id) {
+          photoLike = likeData.likes[i].id;
 
           //   // testArr.push(likeData.likes[i].userId);
           //   console.log('found a like already');
-            //   await fetch(`/api/likes/${likeData.likes[i].id}`, {
-            //   method: "DELETE",
-            //   // body: JSON.stringify(body),
-            //   headers: {
-            //     "Content-type": "application/json",
-            //   },
-            // });
+          //   await fetch(`/api/likes/${likeData.likes[i].id}`, {
+          //   method: "DELETE",
+          //   // body: JSON.stringify(body),
+          //   headers: {
+          //     "Content-type": "application/json",
+          //   },
+          // });
           //   console.log(likeData);
           //   break;
           // } else {
@@ -243,55 +239,55 @@ let showComment = () => {
           //   const userId = 1;
           //   const body = { userId, pictureId };
           //   console.log("before fetch")
-            // const res = await fetch("/api/likes", {
-            //   method: "POST",
-            //   body: JSON.stringify(body),
-            //   headers: {
-            //     "Content-type": "application/json",
-            //   },
-            // });
-            // console.log("after fetch")
+          // const res = await fetch("/api/likes", {
+          //   method: "POST",
+          //   body: JSON.stringify(body),
+          //   headers: {
+          //     "Content-type": "application/json",
+          //   },
+          // });
+          // console.log("after fetch")
 
-            // const data = await res.json();
-            // if (!res.ok) {
-            //   const { message } = data;
-            //   const errorsContainer = document.querySelector("#errors-container");
-            //   errorsContainer.innerHTML = message;
-            //   return;
-            // }
+          // const data = await res.json();
+          // if (!res.ok) {
+          //   const { message } = data;
+          //   const errorsContainer = document.querySelector("#errors-container");
+          //   errorsContainer.innerHTML = message;
+          //   return;
+          // }
           //   // console.log('did we get here?')
 
           // }
-      }
-      // console.log(photoLike);
-    };
-        if (photoLike) {
-          await fetch(`/api/likes/${photoLike}`, {
-            method: "DELETE",
-            // body: JSON.stringify(body),
-            headers: {
-              "Content-type": "application/json",
-            },
-          });
-        } else {
-          const res = await fetch("/api/likes", {
-            method: "POST",
-            body: JSON.stringify(body),
-            headers: {
-              "Content-type": "application/json",
-            },
-          });
-          console.log("after fetch")
-
-          const data = await res.json();
-          if (!res.ok) {
-            const { message } = data;
-            const errorsContainer = document.querySelector("#errors-container");
-            errorsContainer.innerHTML = message;
-            return;
-          }
         }
-  }
+        // console.log(photoLike);
+      }
+      if (photoLike) {
+        await fetch(`/api/likes/${photoLike}`, {
+          method: "DELETE",
+          // body: JSON.stringify(body),
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+      } else {
+        const res = await fetch("/api/likes", {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+        console.log("after fetch");
+
+        const data = await res.json();
+        if (!res.ok) {
+          const { message } = data;
+          const errorsContainer = document.querySelector("#errors-container");
+          errorsContainer.innerHTML = message;
+          return;
+        }
+      }
+    }
     let likeEle = document.querySelector(`.totalLikes-${pictureId}`);
     let likes = await getLikesForPic(pictureId);
     console.log(likes.user.id, likes); //see if likes.likeId and likes.userId exist in the likes array and compare if it exists.
@@ -301,42 +297,68 @@ let showComment = () => {
     if (likes) {
       totalLikes = likes.length;
     }
-    console.log(totalLikes)
+    console.log(totalLikes);
     likeEle.innerHTML = `${totalLikes} likes`;
+  }
+
+  let regex2 = /comment-form-\d+/;
+  if (regex2.test(e.target.className)) {
+    console.log(e.target.className);
+    let photoId = e.target.className.slice(13, e.target.id.length);
+    console.log(photoId);
+    e.preventDefault();
+    let commentForm = document.querySelector(`#comment-form-${photoId}`);
+    const formData = new FormData(commentForm);
+    const userId = formData.get("userId");
+    const content = formData.get("content");
+    const body = { userId, photoId, content };
+    const res = await fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      const { message } = data;
+      const errorsContainer = document.querySelector("#errors-container");
+      errorsContainer.innerHTML = message;
+      return;
     }
-  });
+    await populateCommentList(pictureId);
+  }
+});
 // };
 
-
-
-const commentButton = () => {
-  window.addEventListener('click', async (e) => {
-    let regex = /comment-form-\d+/;
-    if (regex.test(e.target.id)) {
-      console.log(e.target.id)
-      let photoId = e.target.id.slice(15, e.target.id.length);
-      console.log(photoId);
-      e.preventDefault();
-      let commentForm = document.querySelector(`#comment-form-${photoId}`);
-      const formData = new FormData(commentForm);
-      const userId = formData.get("userId");
-      const content = formData.get("content");
-      const body = { userId, photoId, content };
-      const res = await fetch("/api/comments", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        const { message } = data;
-        const errorsContainer = document.querySelector("#errors-container");
-        errorsContainer.innerHTML = message;
-        return;
-      }
-      await populateCommentList(pictureId);
-    }
-  })
-};
+// const commentButton = () => {
+//   window.addEventListener("submit", async (e) => {
+//     let regex = /comment-form-\d+/;
+//     if (regex.test(e.target.id)) {
+//       console.log(e.target.id);
+//       let photoId = e.target.id.slice(11, e.target.id.length);
+//       console.log(photoId);
+//       e.preventDefault();
+//       let commentForm = document.querySelector(`#comment-form-${photoId}`);
+//       const formData = new FormData(commentForm);
+//       const userId = formData.get("userId");
+//       const content = formData.get("content");
+//       const body = { userId, photoId, content };
+//       const res = await fetch("/api/comments", {
+//         method: "POST",
+//         body: JSON.stringify(body),
+//         headers: {
+//           "Content-type": "application/json",
+//         },
+//       });
+//       const data = await res.json();
+//       if (!res.ok) {
+//         const { message } = data;
+//         const errorsContainer = document.querySelector("#errors-container");
+//         errorsContainer.innerHTML = message;
+//         return;
+//       }
+//       await populateCommentList(pictureId);
+//     }
+//   });
+// };

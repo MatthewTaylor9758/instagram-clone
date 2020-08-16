@@ -17,6 +17,6 @@ module.exports = {
   },
   production: {
     dialect: "postgres",
-    use_env_variable: "DATABASE_URL",
+    use_env_variable: "postgresql-colorful-00209",
   },
 };

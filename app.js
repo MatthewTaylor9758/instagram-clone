@@ -22,9 +22,6 @@ const pagesRouter = require("./routes/pages");
 app.use("/api", apiRouter);
 app.use("/", pagesRouter);
 
-app.get("/hello", (req, res) => {
-  res.send("Hello World!");
-});
 app.use((req, res, next) => {
   res.render("error-page");
 });
