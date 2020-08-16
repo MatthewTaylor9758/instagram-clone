@@ -8,13 +8,14 @@ router.post(
   "/",
   routeHandler(async (req, res, next) => {
     let { pictureId } = req.body;
-    const userId = await parseInt(req.cookies.user);
+    console.log(req.body, req.cookies);
+    const userId = parseInt(req.cookies.user);
     const like = await Like.create({
       pictureId,
       userId,
     });
-    // res.json({ like });
-    res.redirect('/');
+    res.json({ like });
+    // res.redirect('/');
   })
 );
 router.get(

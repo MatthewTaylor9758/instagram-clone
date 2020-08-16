@@ -30,9 +30,10 @@ html(lang='en')
           button(id='add-photo-button' class="btn btn-outline-dark" type='submit') Add Image
       div#images
         each picture in pictures
-          div(id=`photo-${picture.id}`)
+          div(id=`photo-${picture.id}` class="photo-div")
             img(src=picture.fileLocation)
-            p #{picture.description}
-            //- p #{picture.id}
-            //- button(type='submit' id=`delete-button-${picture.id}`) Delete
-            input(type='image' src='public/images/trash-can.png' id=`delete-button-${picture.id}`)
+            div(id= "description-input-wrapper")
+              p(id=`picture-description-${picture.id}`) #{picture.description}
+              //- p #{picture.id}
+              //- button(type='submit' id=`delete-button-${picture.id}`) Delete
+              input(type='image' class="trash" src='public/images/trash-can.png' id=`delete-button-${picture.id}`)
