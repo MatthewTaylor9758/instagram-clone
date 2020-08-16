@@ -19,11 +19,12 @@ form.addEventListener("submit", async (e) => {
   const data = await res.json();
   if (!res.ok) {
     const { message, errors } = data;
-
-    for (let error of errors) {
-      const errorLi = document.createElement("li");
-      errorLi.innerHTML = error;
-      errorsContainer.appendChild(errorLi);
+    if (errors) {
+      for (let error of errors) {
+        const errorLi = document.createElement("li");
+        errorLi.innerHTML = error;
+        errorsContainer.appendChild(errorLi);
+      }
     }
     return;
   }
