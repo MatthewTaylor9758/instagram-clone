@@ -192,11 +192,14 @@ let showComment = () => {
       let likeData = await getLikesForPic(pictureId);
       console.log(likeData);
       let testArr = [];
+      const body = {
+        body: likeData.user.id,
+        pictureId
+      };
       if (likeData.likes.length === 0) {
         console.log(testArr);
         console.log('start of the thing');
         const userId = 1;
-        const body = { userId, pictureId };
         console.log("before fetch")
         const res = await fetch("/api/likes", {
           method: "POST",
@@ -215,44 +218,80 @@ let showComment = () => {
           return;
         }
       } else {
+        let photoLike;
         for (let i = 0; i < likeData.likes.length; i++) {
           if (likeData.likes[i].userId === likeData.user.id) {
-            // testArr.push(likeData.likes[i].userId);
-            console.log('found a like already');
-              await fetch(`/api/likes/${likeData.likes[i].id}`, {
-              method: "DELETE",
-              // body: JSON.stringify(body),
-              headers: {
-                "Content-type": "application/json",
-              },
-            });
-          } else {
-            console.log(testArr);
-            console.log('start of the thing');
-            const userId = 1;
-            const body = { userId, pictureId };
-            console.log("before fetch")
-            const res = await fetch("/api/likes", {
-              method: "POST",
-              body: JSON.stringify(body),
-              headers: {
-                "Content-type": "application/json",
-              },
-            });
-            console.log("after fetch")
+            photoLike = likeData.likes[i].id;
 
-            const data = await res.json();
-            if (!res.ok) {
-              const { message } = data;
-              const errorsContainer = document.querySelector("#errors-container");
-              errorsContainer.innerHTML = message;
-              return;
-            }
-            // console.log('did we get here?')
 
-          }
+
+
+          //   // testArr.push(likeData.likes[i].userId);
+          //   console.log('found a like already');
+            //   await fetch(`/api/likes/${likeData.likes[i].id}`, {
+            //   method: "DELETE",
+            //   // body: JSON.stringify(body),
+            //   headers: {
+            //     "Content-type": "application/json",
+            //   },
+            // });
+          //   console.log(likeData);
+          //   break;
+          // } else {
+          //   console.log(testArr);
+          //   console.log('start of the thing');
+          //   const userId = 1;
+          //   const body = { userId, pictureId };
+          //   console.log("before fetch")
+            // const res = await fetch("/api/likes", {
+            //   method: "POST",
+            //   body: JSON.stringify(body),
+            //   headers: {
+            //     "Content-type": "application/json",
+            //   },
+            // });
+            // console.log("after fetch")
+
+            // const data = await res.json();
+            // if (!res.ok) {
+            //   const { message } = data;
+            //   const errorsContainer = document.querySelector("#errors-container");
+            //   errorsContainer.innerHTML = message;
+            //   return;
+            // }
+          //   // console.log('did we get here?')
+
+          // }
       }
+      // console.log(photoLike);
     };
+        if (photoLike) {
+          await fetch(`/api/likes/${photoLike}`, {
+            method: "DELETE",
+            // body: JSON.stringify(body),
+            headers: {
+              "Content-type": "application/json",
+            },
+          });
+        } else {
+          const res = await fetch("/api/likes", {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-type": "application/json",
+            },
+          });
+          console.log("after fetch")
+
+          const data = await res.json();
+          if (!res.ok) {
+            const { message } = data;
+            const errorsContainer = document.querySelector("#errors-container");
+            errorsContainer.innerHTML = message;
+            return;
+          }
+        }
+  }
     let likeEle = document.querySelector(`.totalLikes-${pictureId}`);
     let likes = await getLikesForPic(pictureId);
     console.log(likes.user.id, likes); //see if likes.likeId and likes.userId exist in the likes array and compare if it exists.
