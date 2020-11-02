@@ -47,6 +47,7 @@ router.delete(
       ]
     });
     console.log("picture", picture);
+    debugger
     await picture.destroy();
     res.status(204).end();
   })
