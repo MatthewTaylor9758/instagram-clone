@@ -33,6 +33,12 @@ router.get(
 router.get(
   "/",
   routeHandler(async (req, res, next) => {
+    console.log('found it');
+    console.log(req.cookies.user);
+    if (!req.cookies.user) {
+      res.render('login');
+      return;
+    }
     const user = await User.findOne({
       where: {
         id: await parseInt(req.cookies.user),
