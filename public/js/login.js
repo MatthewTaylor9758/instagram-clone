@@ -48,5 +48,7 @@ demoLogin.addEventListener("submit", async (e) => {
     return;
   }
 
+  console.log(document.cookie)
+  debugger
   window.location.href = "/";
 });

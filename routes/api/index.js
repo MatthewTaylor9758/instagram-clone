@@ -33,6 +33,7 @@ router.use((err, req, res, next) => {
   });
 });
 router.use("*", (req, res) => {
+  window.location.href = '/login';
   res.status(404).json({ message: "route does not exist" });
 });
 
