@@ -49,6 +49,7 @@ router.delete(
     console.log("picture", picture);
     debugger
     await picture.destroy();
+    console.log('***********success****************')
     res.status(204).end();
   })
 );
