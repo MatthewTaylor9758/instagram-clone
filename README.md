@@ -34,46 +34,38 @@ Using CSS and its many features we were able to acheive the look we desired. We 
 </br>
 ## Back End Overview
 ### Sequelize ORM
-We decided to use the Sequelize.js library for its ease of use when creating models, migrations and seeder files. Sequelize helped streamline our interactions with the database in all facets, such as creating a model for users as the code below shows:
+We decided to use the Sequelize.js library for its ease of use when creating models, migrations and seeder files. Sequelize helped streamline our interactions with the database in all facets, such as creating a model for pictures as the code below shows:
 ```
 "use strict";
 const { Model } = require("sequelize");
-const bcrypt = require("bcryptjs");
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Picture extends Model {
 
-    validatePassword(password) {
-      return bcrypt.compareSync(password, this.password.toString());
-    }
-    
     static associate(models) {
-      User.hasMany(models.Relationship, {
-        foreignKey: "userId",
-        otherKey: "relatedUserId",
-      });
-      User.hasMany(models.Picture, {
+      Picture.belongsTo(models.User, {
         foreignKey: "userId",
       });
-      User.hasMany(models.Comment, {
-        foreignKey: "userId",
+      Picture.hasMany(models.Comment, {
+        foreignKey: "pictureId",
       });
-      User.hasMany(models.Like, {
-        foreignKey: "userId",
+      Picture.hasMany(models.Like, {
+        foreignKey: "pictureId",
       });
     }
   }
-  User.init(
+  Picture.init(
     {
-      userName: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      isPrivate: DataTypes.BOOLEAN,
+      userId: DataTypes.INTEGER,
+      fileLocation: DataTypes.STRING,
+      description: DataTypes.STRING(1000),
     },
     {
       sequelize,
-      modelName: "User",
+      modelName: "Picture",
     }
   );
-  return User;
+  return Picture;
 };
 ```
+</br>
+The code above is a much easier way to interact with a database and create models within it. Here we set up the model so the picture belongs to only one user, the users can have many pictures, and each picture can have many likes. This is just a taste of the features Sequelize brings, but it is a good illustation of how we leveraged part of that utility.
