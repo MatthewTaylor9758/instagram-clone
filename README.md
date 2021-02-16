@@ -72,3 +72,16 @@ The code above is a much easier way to interact with a database and create model
 
 ### PostgreSQL
 We leveraged PostgreSQL's ability to use different transactions, foreign keys, subqueries, triggers, and different user-defined types and functions to create our site. Sequelize and PostgreSQL work together to make our database construction, alterations, and interactions smoother.
+
+## Moving Forward
+The next thing to do would be to implement AWS to have users be able to add pictures to their profiles. I would also add the ability of the site to change the size of the pictures dynamically so all pictures would be the same size in both feeds. It would also be nice to add a grid for the main feed once there were enough pictures to support such a feature.
+
+### Thank You
+
+I sincerely apprectiate the time you have taken out of your day to read this far and parse through the site we had a ton of fun making! Our team was fantastic and I cannot wait to work with them again in the future!
+
+<ul>
+  <li>Gifs: Giphy.com</li>
+  <li>Architecture Diagram is courtesy of</li> 
+</ul>
+  
