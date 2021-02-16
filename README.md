@@ -5,7 +5,7 @@
 - [Application Architecture and Technologies Involved](#application-architecture)
 - [Front End Overview](#front-end-overview)
 - [Back End Overview](#back-end-overview)
-- Moving Forward
+- [Moving Forward](#moving-forward)
 ## Instagram Overview
 Instagram is based on the real web-based Instagram site, focused on helping connect people and share photos and videos!
 </br>
