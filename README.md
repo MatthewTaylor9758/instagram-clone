@@ -7,5 +7,7 @@
 - Back End Overview
 - Moving Forward
 ### Instagram Overview
-This is just some placeholder text for now.
-[linkedin](https://www.linkedin.com/in/matthew-taylor-3763ba1b8/)
+Instagram is based on the real web-based Instagram site, focused on helping to connect people and share photos and videos!
+</br>
+blah
+
