@@ -6,6 +6,6 @@
 - Front End Overview
 - Back End Overview
 - Moving Forward
-### Instagram Overview {#instagram-overview}
+### Instagram Overview
 This is just some placeholder text for now.
 [linkedin](https://www.linkedin.com/in/matthew-taylor-3763ba1b8/)
