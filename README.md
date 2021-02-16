@@ -7,7 +7,6 @@
 - Back End Overview
 - Moving Forward
 ### Instagram Overview
-Instagram is based on the real web-based Instagram site, focused on helping to connect people and share photos and videos!
-</br>
+Instagram is based on the real web-based Instagram site, focused on helping connect people and share photos and videos!
 blah
 
