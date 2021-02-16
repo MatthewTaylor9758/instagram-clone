@@ -15,5 +15,5 @@ The front end was built using HTML, CSS, and the Pug library, while the back end
 </br>
 Users can look at all of the pictures they have posted, the ones their friends have in the main feed, and leave comments if they wish.
 </br>
-![prHqno](https://i.makeagif.com/media/2-16-2021/prHqno.gif)
+![prHqno](https://media.giphy.com/media/4V4Oy77v1yy7hJBqvs/giphy.gif)
 
