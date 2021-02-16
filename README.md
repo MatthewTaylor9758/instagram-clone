@@ -6,7 +6,7 @@
 - Front End Overview
 - Back End Overview
 - Moving Forward
-### Instagram Overview
+## Instagram Overview
 Instagram is based on the real web-based Instagram site, focused on helping connect people and share photos and videos!
 </br>
 </br>
@@ -15,5 +15,14 @@ The front end was built using HTML, CSS, and the Pug library, while the back end
 </br>
 Users can look at all of the pictures they have posted, the ones their friends have in the main feed, and leave comments if they wish.
 </br>
-![prHqno](https://media.giphy.com/media/4V4Oy77v1yy7hJBqvs/giphy.gif)
-
+</br>
+![scrolling in main feed](https://media.giphy.com/media/4V4Oy77v1yy7hJBqvs/giphy.gif)
+</br>
+</br>
+## Application Architecture
+Placeholder for diagram that will show technologies and how they interact with each other.
+</br>
+</br>
+## Front End Overview
+### Pug
+Pug is the template engine we used through the entire front end for its ability to natively use Javascript and convert the code seamlessly into HTML that the browser can parse.
