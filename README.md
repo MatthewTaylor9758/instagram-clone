@@ -35,7 +35,8 @@ Using CSS and its many features we were able to acheive the look we desired. We 
 ## Back End Overview
 ### Sequelize ORM
 We decided to use the Sequelize.js library for its ease of use when creating models, migrations and seeder files. Sequelize helped streamline our interactions with the database in all facets, such as creating a model for users as the code below shows:
-`"use strict";
+```
+"use strict";
 const { Model } = require("sequelize");
 const bcrypt = require("bcryptjs");
 module.exports = (sequelize, DataTypes) => {
@@ -75,4 +76,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return User;
 };
-`
+```
