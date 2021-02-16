@@ -80,6 +80,8 @@ The next thing to do would be to implement AWS to have users be able to add pict
 
 I sincerely apprectiate the time you have taken out of your day to read this far and parse through the site we had a ton of fun making! Our team was fantastic and I cannot wait to work with them again in the future!
 
+### Credits:
+
 <ul>
   <li>Gifs: Giphy.com</li>
   <li>Architecture Diagram is courtesy of</li> 
