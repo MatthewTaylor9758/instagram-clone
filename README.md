@@ -20,7 +20,7 @@ Users can look at all of the pictures they have posted, the ones their friends h
 </br>
 </br>
 ## Application Architecture
-Placeholder for diagram that will show technologies and how they interact with each other.
+![Instagram Architecture](https://raw.githubusercontent.com/MatthewTaylor9758/instagram-clone/master/public/images/Instagram%20Architecture.png)
 </br>
 </br>
 ## Front End Overview
